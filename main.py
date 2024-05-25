@@ -1,0 +1,59 @@
+import os
+import validators
+import requests
+import json
+from bs4 import BeautifulSoup
+from openai import OpenAI
+from dotenv import load_dotenv
+from halo import Halo
+
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv('OPENAI_API_KEY')
+)
+
+url = input("Job posting URL: ")
+
+if validators.url(url):
+    response = requests.get(url)
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    spinner = Halo(text='Loading', spinner='dots')
+    spinner.start()
+
+    try:
+        completion = client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {
+                    "role": "user",
+                    "content": "Given the following text from a job description, extract the hard skills and the soft skills exactly as they appear. Limit each result to 1 word. Provide the response as a JSON object similar to the following: {\"hardSkills\": [], \"softSkills\": []} Do not say anything else in your response. The job description will begin after the \"BEGIN DESCRIPTION:\". BEGIN DESCRIPTION: " + soup.get_text()
+                }
+            ]
+        )
+
+        response_json = json.loads(completion.choices[0].message.content)
+
+        spinner.stop()
+
+        print("\nHard skills")
+        print("-----------")
+
+        for hard_skill in response_json["hardSkills"]:
+            print(hard_skill)
+
+        print("\nSoft skills")
+        print("-----------")
+
+        for soft_skill in response_json["softSkills"]:
+            print(soft_skill)
+
+        print("\n")
+    except Exception as e:
+        spinner.stop()
+        print(str(e))
+
+else:
+    print("Please enter a valid URL")
