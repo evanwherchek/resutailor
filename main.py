@@ -24,17 +24,19 @@ client = OpenAI(
 url = input('Job posting URL: ')
 
 if validators.url(url):
+    spinner = Halo(text='Loading', spinner='dots')
+    spinner.start()
+
     response = requests.get(url, timeout=10)
 
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    spinner = Halo(text='Loading', spinner='dots')
-    spinner.start()
-
     try:
         COMPLETION = client.chat.completions.create(
-            model='gpt-4',
-            messages=[
+            temperature = 0.2,
+            model = 'gpt-4',
+            timeout = 10,
+            messages = [
                 {
                     'role': 'user',
                     'content': PROMPT + soup.get_text()
@@ -59,7 +61,7 @@ if validators.url(url):
             print(soft_skill)
 
         print('\n')
-    except Exception as e:
+    except TimeoutError as e:
         spinner.stop()
         print(str(e))
 
