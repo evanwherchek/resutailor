@@ -10,7 +10,7 @@ from halo import Halo
 
 PROMPT = ("Given the following text from a job description, "
           "extract the hard skills and the soft skills exactly as they appear. "
-          "Limit each result to 1 word. "
+          "Limit each result to 1-2 words. "
           "Provide the response as a JSON object similar to the following: "
           "{\"hardSkills\": [], \"softSkills\": []} Do not say anything else in your response. "
           "The job description will begin after the 'BEGIN DESCRIPTION:'. BEGIN DESCRIPTION: ")
