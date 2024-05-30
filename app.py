@@ -1,11 +1,11 @@
 """The backend service that parses job listings and edits .docx files"""
 
 import os
-from flask import Flask, request
+from flask import Flask, request, abort
 import validators
 import requests
 from bs4 import BeautifulSoup
-from openai import OpenAI
+from openai import OpenAI, _exceptions
 from dotenv import load_dotenv
 
 PROMPT = ("Given the text from a job description, "
@@ -18,7 +18,7 @@ PROMPT = ("Given the text from a job description, "
 app = Flask(__name__)
 
 @app.route('/parseSkills')
-def hello_world():
+def parse_skills():
     """Takes the job listing URL, extracts the skills from it, and returns a list"""
     url = request.args.get('postingURL', 'missing')
 
@@ -32,21 +32,30 @@ def hello_world():
         response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        completion = client.chat.completions.create(
+        if soup.get_text() == '':
+            abort(422)
+
+        try:
+            completion = client.chat.completions.create(
             temperature = 0.2,
             model = 'gpt-4',
             timeout = 10,
             messages = [
-                {
-                    'role': 'user',
-                    'content': PROMPT + soup.get_text()
-                }
-            ]
-        )
+                    {
+                        'role': 'user',
+                        'content': PROMPT + soup.get_text()
+                    }
+                ]
+            )
 
-        return completion.choices[0].message.content
-
-    return 'Hello, World!'
+            return completion.choices[0].message.content
+        except _exceptions.BadRequestError as e:
+            abort(413)
+        except _exceptions.APITimeoutError as e:
+            abort(408)
+        
+    else:
+        abort(400)
 
 if __name__ == '__main__':
     app.run(debug=True)
