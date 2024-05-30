@@ -1,25 +1,25 @@
-from flask import Flask, request
+"""The backend service that parses job listings and edits .docx files"""
+
 import os
-import json
+from flask import Flask, request
 import validators
 import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
 from dotenv import load_dotenv
-from halo import Halo
 
-PROMPT = ("Given the following text from a job description, "
-          "extract the hard skills and the soft skills exactly as they appear. "
+PROMPT = ("Given the text from a job description, "
+          "extract the skills exactly as they appear. "
           "Limit each result to 1-2 words. "
-          "Provide the response as a JSON object similar to the following: "
-          "{\"hardSkills\": [], \"softSkills\": []} Do not say anything else in your response. "
+          "Provide the response as a JSON object with the following format: "
+          "{\"skills\": []} Do not say anything else in your response. "
           "The job description will begin after the 'BEGIN DESCRIPTION:'. BEGIN DESCRIPTION: ")
-
 
 app = Flask(__name__)
 
 @app.route('/parseSkills')
 def hello_world():
+    """Takes the job listing URL, extracts the skills from it, and returns a list"""
     url = request.args.get('postingURL', 'missing')
 
     load_dotenv()
@@ -32,7 +32,7 @@ def hello_world():
         response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        COMPLETION = client.chat.completions.create(
+        completion = client.chat.completions.create(
             temperature = 0.2,
             model = 'gpt-4',
             timeout = 10,
@@ -44,7 +44,7 @@ def hello_world():
             ]
         )
 
-        return COMPLETION.choices[0].message.content
+        return completion.choices[0].message.content
 
     return 'Hello, World!'
 
