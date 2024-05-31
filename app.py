@@ -7,6 +7,9 @@ import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI, _exceptions
 from dotenv import load_dotenv
+from docx import Document
+import docxedit
+import json
 
 PROMPT = ("Given the text from a job description, "
           "extract the skills exactly as they appear. "
@@ -33,7 +36,7 @@ def parse_skills():
         soup = BeautifulSoup(response.text, 'html.parser')
 
         if soup.get_text() == '':
-            abort(422)
+            abort(422) # Unprocessable content
 
         try:
             completion = client.chat.completions.create(
@@ -50,12 +53,30 @@ def parse_skills():
 
             return completion.choices[0].message.content
         except _exceptions.BadRequestError as e:
-            abort(413)
+            abort(413) # Context window exceeded
         except _exceptions.APITimeoutError as e:
-            abort(408)
-        
+            abort(408) # OpenAI timeout
     else:
         abort(400)
+
+@app.route('/appendSkills')
+def append_skills():
+    file_name = 'ResumeTemplate.docx'
+    skills = json.loads('{\"skills\": [\"programming\", \"communication\"]}')
+
+    print('Editing...')
+    document = Document(docx=file_name)
+
+    replacement_line = ''
+
+    for skill in skills['skills']:
+        replacement_line = replacement_line + skill + ", "
+
+    docxedit.replace_string(document, old_string='[EDIT HERE]', new_string=replacement_line)
+
+    document.save('Edited.docx')
+
+    return 'Done!'
 
 if __name__ == '__main__':
     app.run(debug=True)
