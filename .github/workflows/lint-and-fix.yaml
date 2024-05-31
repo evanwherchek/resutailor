@@ -27,6 +27,13 @@ jobs:
     - name: Prettify
       run: cd frontend && npm run prettify
 
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Fix lint errors" || echo "No changes to commit"
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
