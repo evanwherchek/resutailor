@@ -28,7 +28,8 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint src/**/*.tsx --fix",
     "lint": "eslint src/**/*.tsx",
-    "prettify": "prettier src/**/*.tsx --write"
+    "prettify": "prettier src/**/*.tsx --write",
+    "prepare": "husky"
   },
   "eslintConfig": {
     "extends": [
@@ -71,7 +72,6 @@
   "devDependencies": {
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
     "prettier": "^3.2.5"
   }
