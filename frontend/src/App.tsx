@@ -18,8 +18,8 @@ const styles: Style = {
     background: 'linear-gradient(90deg, rgba(22,45,103,1) 5%, rgba(40,84,167,1) 95%)',
   },
   textfield: {
-    background: "#FFFFFF",
-    borderRadius: "10px",
+    background: '#FFFFFF',
+    borderRadius: '10px',
     width: '35%',
     margin: '20px',
   },
