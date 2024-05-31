@@ -19,7 +19,7 @@ const styles: Style = {
   },
   textfield: {
     background: "#FFFFFF",
-    borderRadius: '10px',
+    borderRadius: "10px",
     width: '35%',
     margin: '20px',
   },
