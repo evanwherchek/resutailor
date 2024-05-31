@@ -28,8 +28,7 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint src/**/*.tsx --fix",
     "lint": "eslint src/**/*.tsx",
-    "prettify": "prettier src/**/*.tsx --write",
-    "prepare": "husky"
+    "prettify": "prettier src/**/*.tsx --write"
   },
   "eslintConfig": {
     "extends": [
@@ -37,14 +36,6 @@
       "react-app/jest",
       "plugin:prettier/recommended"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.tsx": "npm run lint:fix"
   },
   "prettier": {
     "printWidth": 120,
