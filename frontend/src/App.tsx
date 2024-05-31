@@ -1,6 +1,5 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import React from 'react';
 
 interface Style {
@@ -19,7 +18,7 @@ const styles: Style = {
     background: 'linear-gradient(90deg, rgba(22,45,103,1) 5%, rgba(40,84,167,1) 95%)'
   },
   textfield: {
-    background: '#FFFFFF',
+    background: "#FFFFFF",
     borderRadius: '10px',
     width: '35%',
     margin: '20px'
