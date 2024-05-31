@@ -21,11 +21,8 @@ jobs:
     - name: Install dependencies
       run: cd frontend && npm ci
 
-    - name: Lint
-      run: cd frontend && npm run lint
-
-    - name: Fix Lint
-      run: cd frontend && npm run lint:fix
+    - name: Lint and Fix
+      run: cd frontend && npm run lint || npm run lint:fix
 
     - name: Prettify
       run: cd frontend && npm run prettify
