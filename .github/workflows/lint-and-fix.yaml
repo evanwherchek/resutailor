@@ -3,7 +3,7 @@ name: Lint and Fix
 on:
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   build:
