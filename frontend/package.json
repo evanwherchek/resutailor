@@ -33,8 +33,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "plugin:prettier/recommended"
+      "react-app/jest"
     ]
   },
   "prettier": {
@@ -46,7 +45,7 @@
     "singleQuote": true,
     "bracketSpacing": true,
     "arrowParens": "always",
-    "endOfLine": "lf"
+    "endOfLine": "auto"
   },
   "browserslist": {
     "production": [
