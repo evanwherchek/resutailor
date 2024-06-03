@@ -13,13 +13,13 @@ const styles: Style = {
     alignItems: 'center',
     height: '100vh',
     background: 'linear-gradient(90deg, rgba(22,45,103,1) 5%, rgba(40,84,167,1) 95%)',
-  }
+  },
 };
 
 function App() {
   return (
     <div style={styles.backdrop}>
-      <EnterUrl/>
+      <EnterUrl />
     </div>
   );
 }
