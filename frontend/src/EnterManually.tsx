@@ -15,7 +15,7 @@ const styles: Style = {
     color: '#FFFFFF',
     fontSize: '30px',
     textAlign: 'center',
-    width: '80%'
+    width: '80%',
   },
   textfield: {
     background: '#FFFFFF',
@@ -51,7 +51,7 @@ function EnterManually() {
         style={styles.textfield}
         id="outlined-multiline-static"
         label="Job description"
-        variant='filled'
+        variant="filled"
         multiline
         rows={10}
       />
