@@ -1,5 +1,5 @@
 import React from 'react';
-import EnterUrl from './EnterUrl';
+import EnterManually from './EnterManually';
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -19,7 +19,7 @@ const styles: Style = {
 function App() {
   return (
     <div style={styles.backdrop}>
-      <EnterUrl />
+      <EnterManually />
     </div>
   );
 }
