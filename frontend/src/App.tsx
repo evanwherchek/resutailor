@@ -22,16 +22,16 @@ function App() {
 
   const goToEnterUrl = () => {
     setStage(1);
-  }
+  };
 
   const goToEnterManually = () => {
     setStage(2);
-  }
+  };
 
   return (
     <div style={styles.backdrop}>
-      {stage === 1 && <EnterUrl findSkills={() => {}} copyAndPaste={goToEnterManually}/>}
-      {stage === 2 && <EnterManually findSkills={() => {}} back={goToEnterUrl}/>}
+      {stage === 1 && <EnterUrl findSkills={() => {}} copyAndPaste={goToEnterManually} />}
+      {stage === 2 && <EnterManually findSkills={() => {}} back={goToEnterUrl} />}
     </div>
   );
 }

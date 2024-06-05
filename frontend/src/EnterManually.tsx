@@ -11,8 +11,8 @@ interface Style {
 }
 
 interface EnterManuallyProps {
-  findSkills: () => void,
-  back: () => void
+  findSkills: () => void;
+  back: () => void;
 }
 
 const styles: Style = {
@@ -70,6 +70,6 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkills, back }) => {
       </Button>
     </>
   );
-}
+};
 
 export default EnterManually;

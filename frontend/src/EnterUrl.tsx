@@ -9,8 +9,8 @@ interface Style {
 }
 
 interface EnterUrlProps {
-  findSkills: () => void,
-  copyAndPaste: () => void
+  findSkills: () => void;
+  copyAndPaste: () => void;
 }
 
 const styles: Style = {
@@ -60,6 +60,6 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
       </Button>
     </>
   );
-}
+};
 
 export default EnterUrl;
