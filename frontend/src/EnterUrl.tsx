@@ -8,6 +8,11 @@ interface Style {
   textButton: React.CSSProperties;
 }
 
+interface EnterUrlProps {
+  findSkills: () => void,
+  copyAndPaste: () => void
+}
+
 const styles: Style = {
   textfield: {
     background: '#FFFFFF',
@@ -27,14 +32,12 @@ const styles: Style = {
   },
 };
 
-function EnterUrl() {
+const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextFieldValue(event.target.value);
   };
-
-  const findSkills = (url: string) => {};
 
   return (
     <>
@@ -49,10 +52,10 @@ function EnterUrl() {
         value={textFieldValue}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={() => {}}>
+      <Button style={styles.button} variant="contained" onClick={findSkills}>
         Find skills
       </Button>
-      <Button style={styles.textButton} variant="text">
+      <Button style={styles.textButton} variant="text" onClick={copyAndPaste}>
         Copy and paste instead
       </Button>
     </>

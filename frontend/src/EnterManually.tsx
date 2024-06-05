@@ -10,6 +10,11 @@ interface Style {
   textButton: React.CSSProperties;
 }
 
+interface EnterManuallyProps {
+  findSkills: () => void,
+  back: () => void
+}
+
 const styles: Style = {
   label: {
     color: '#FFFFFF',
@@ -35,7 +40,7 @@ const styles: Style = {
   },
 };
 
-function EnterManually() {
+const EnterManually: React.FC<EnterManuallyProps> = ({ findSkills, back }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,11 +59,13 @@ function EnterManually() {
         variant="filled"
         multiline
         rows={10}
+        value={textFieldValue}
+        onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={() => {}}>
+      <Button style={styles.button} variant="contained" onClick={findSkills}>
         Find skills
       </Button>
-      <Button style={styles.textButton} variant="text">
+      <Button style={styles.textButton} variant="text" onClick={back}>
         Back
       </Button>
     </>
