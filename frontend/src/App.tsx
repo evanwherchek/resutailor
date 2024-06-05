@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EnterManually from './EnterManually';
 import EnterUrl from './EnterUrl';
+import SelectSkills from './SelectSkills'
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -18,7 +19,7 @@ const styles: Style = {
 };
 
 function App() {
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(3);
 
   const goToEnterUrl = () => {
     setStage(1);
@@ -28,10 +29,15 @@ function App() {
     setStage(2);
   };
 
+  const goToSelectSkills = () => {
+    setStage(3);
+  }
+
   return (
     <div style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkills={() => {}} copyAndPaste={goToEnterManually} />}
       {stage === 2 && <EnterManually findSkills={() => {}} back={goToEnterUrl} />}
+      {stage === 3 && <SelectSkills />}
     </div>
   );
 }
