@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EnterManually from './EnterManually';
 import EnterUrl from './EnterUrl';
-import SelectSkills from './SelectSkills'
+import SelectSkills from './SelectSkills';
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -31,7 +31,7 @@ function App() {
 
   const goToSelectSkills = () => {
     setStage(3);
-  }
+  };
 
   return (
     <div style={styles.backdrop}>
