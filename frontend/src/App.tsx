@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <div style={styles.backdrop}>
+    <div data-testid='parent' style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkillsClick={goToSelectSkills} copyAndPasteClick={goToEnterManually} />}
       {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
       {stage === 3 && <SelectSkills continueClick={goToDownloadResume} />}
