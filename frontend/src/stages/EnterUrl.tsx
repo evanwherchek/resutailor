@@ -1,6 +1,8 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
+import validator from 'validator';
 
 interface Style {
   textfield: React.CSSProperties;
@@ -34,9 +36,26 @@ const styles: Style = {
 
 const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextFieldValue(event.target.value);
+  };
+
+  const checkField = (value: string) => {
+    if(validator.isURL(value)){
+      findSkills();
+    }else{
+      setOpen(true);
+    }
+  }
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -52,12 +71,18 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
         value={textFieldValue}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={findSkills}>
+      <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)} >
         Find skills
       </Button>
       <Button style={styles.textButton} variant="text" onClick={copyAndPaste}>
         Copy and paste instead
       </Button>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="Please enter a valid URL."
+      />
     </>
   );
 };
