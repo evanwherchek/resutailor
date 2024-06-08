@@ -50,7 +50,7 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClic
   };
 
   const checkField = (value: string) => {
-    if (validator.isURL(value)) {
+    if (!validator.isEmpty(value)) {
       findSkillsClick();
     } else {
       setOpen(true);
@@ -80,13 +80,13 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClic
         value={textFieldValue}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={() => checkField}>
+      <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)}>
         Find skills
       </Button>
       <Button style={styles.textButton} variant="text" onClick={backClick}>
         Back
       </Button>
-      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} message="Please enter a valid URL." />
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} message="Please enter a job description." />
     </>
   );
 };
