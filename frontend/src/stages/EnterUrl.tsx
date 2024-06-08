@@ -43,12 +43,12 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
   };
 
   const checkField = (value: string) => {
-    if(validator.isURL(value)){
+    if (validator.isURL(value)) {
       findSkills();
-    }else{
+    } else {
       setOpen(true);
     }
-  }
+  };
 
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -71,18 +71,13 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
         value={textFieldValue}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)} >
+      <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)}>
         Find skills
       </Button>
       <Button style={styles.textButton} variant="text" onClick={copyAndPaste}>
         Copy and paste instead
       </Button>
-      <Snackbar
-        open={open}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        message="Please enter a valid URL."
-      />
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} message="Please enter a valid URL." />
     </>
   );
 };
