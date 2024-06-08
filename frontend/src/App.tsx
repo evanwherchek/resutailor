@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import EnterManually from './EnterManually';
-import EnterUrl from './EnterUrl';
-import SelectSkills from './SelectSkills';
-import DownloadResume from './DownloadResume';
+import EnterManually from './stages/EnterManually';
+import EnterUrl from './stages/EnterUrl';
+import SelectSkills from './stages/SelectSkills';
+import DownloadResume from './stages/DownloadResume';
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -20,7 +20,7 @@ const styles: Style = {
 };
 
 function App() {
-  const [stage, setStage] = useState(4);
+  const [stage, setStage] = useState(1);
 
   const goToEnterUrl = () => {
     setStage(1);
