@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Chip, Button } from '@mui/material';
 
-interface SelectSkillsProps {}
+interface SelectSkillsProps {
+  continueButton: () => void;
+}
 
 interface Style {
   mainText: React.CSSProperties;
@@ -64,7 +66,7 @@ const styles: Style = {
   },
 };
 
-const SelectSkills: React.FC<SelectSkillsProps> = () => {
+const SelectSkills: React.FC<SelectSkillsProps> = ({ continueButton }) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
@@ -109,8 +111,8 @@ const SelectSkills: React.FC<SelectSkillsProps> = () => {
           return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
         })}
       </div>
-      <Button style={styles.button} variant="contained" onClick={() => {}}>
-        Find skills
+      <Button style={styles.button} variant="contained" onClick={continueButton}>
+        Continue
       </Button>
     </>
   );

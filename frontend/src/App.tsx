@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EnterManually from './EnterManually';
 import EnterUrl from './EnterUrl';
 import SelectSkills from './SelectSkills';
+import DownloadResume from './DownloadResume';
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -19,7 +20,7 @@ const styles: Style = {
 };
 
 function App() {
-  const [stage, setStage] = useState(3);
+  const [stage, setStage] = useState(1);
 
   const goToEnterUrl = () => {
     setStage(1);
@@ -33,11 +34,16 @@ function App() {
     setStage(3);
   };
 
+  const goToDownloadResume = () => {
+    setStage(4);
+  };
+
   return (
     <div style={styles.backdrop}>
-      {stage === 1 && <EnterUrl findSkills={() => {}} copyAndPaste={goToEnterManually} />}
-      {stage === 2 && <EnterManually findSkills={() => {}} back={goToEnterUrl} />}
-      {stage === 3 && <SelectSkills />}
+      {stage === 1 && <EnterUrl findSkills={goToSelectSkills} copyAndPaste={goToEnterManually} />}
+      {stage === 2 && <EnterManually findSkills={goToSelectSkills} back={goToEnterUrl} />}
+      {stage === 3 && <SelectSkills continueButton={goToDownloadResume}/>}
+      {stage === 4 && <DownloadResume />}
     </div>
   );
 }
