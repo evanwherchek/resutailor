@@ -35,21 +35,21 @@ const styles: Style = {
     color: '#000000',
   },
   unselectedChip: {
-    color: '#FFFFFF'
-  }
+    color: '#FFFFFF',
+  },
 };
 
 const SelectSkills: React.FC<SelectSkillsProps> = () => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
-    setChipList(prevChipList => {
+    setChipList((prevChipList) => {
       return prevChipList.map((chip) => {
         if (chip.key === data.key) {
           return {
             ...chip,
             style: chip.selected ? styles.unselectedChip : styles.selectedChip,
-            selected: !chip.selected
+            selected: !chip.selected,
           };
         } else {
           return chip;
@@ -63,12 +63,12 @@ const SelectSkills: React.FC<SelectSkillsProps> = () => {
       const jsonObject: any = JSON.parse(jsonString);
       const newChipList = [];
 
-      for(let i = 0; i < jsonObject.skills.length; i++){
+      for (let i = 0; i < jsonObject.skills.length; i++) {
         newChipList.push({ key: i, label: jsonObject.skills[i], style: styles.unselectedChip, selected: false });
       }
 
       setChipList(newChipList);
-    }
+    };
 
     populateList('{"skills": ["Java", "Python", "AWS", "Kubernetes"]}');
   }, []);
@@ -78,9 +78,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = () => {
       <p style={styles.mainText}>12 skills found</p>
       <p style={styles.subText}>Which of the following do you have?</p>
       {chipList.map((data) => {
-        return(
-          <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />
-        )
+        return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
       })}
     </>
   );
