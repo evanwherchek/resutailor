@@ -26,28 +26,28 @@ const styles: Style = {
     textAlign: 'center',
     width: '80%',
     fontWeight: 'bold',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   subText: {
     color: '#FFFFFF',
     fontSize: '30px',
     textAlign: 'center',
     width: '80%',
-    marginTop: '10px'
+    marginTop: '10px',
   },
   selectedChip: {
     color: '#FFFFFF',
     background: '#000000',
     margin: '10px',
     fontSize: '20px',
-    padding: '10px'
+    padding: '10px',
   },
   unselectedChip: {
     color: '#000000',
     background: '#FFFFFF',
     margin: '10px',
     fontSize: '20px',
-    padding: '10px'
+    padding: '10px',
   },
   chipContainer: {
     width: '60%',
@@ -60,7 +60,7 @@ const styles: Style = {
   button: {
     borderRadius: '25px',
     textTransform: 'none',
-    margin: '25px'
+    margin: '25px',
   },
 };
 
@@ -95,7 +95,9 @@ const SelectSkills: React.FC<SelectSkillsProps> = () => {
       setChipList(newChipList);
     };
 
-    populateList('{"skills": ["Java", "Python", "AWS", "Kubernetes", "Docker", "GCP", "data structures", "C++", "OOP", "concurrency"]}');
+    populateList(
+      '{"skills": ["Java", "Python", "AWS", "Kubernetes", "Docker", "GCP", "data structures", "C++", "OOP", "concurrency"]}',
+    );
   }, []);
 
   return (
