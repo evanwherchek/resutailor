@@ -66,7 +66,7 @@ const styles: Style = {
   },
 };
 
-const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick: continueButton }) => {
+const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick }) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
@@ -111,7 +111,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick: continueButt
           return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
         })}
       </div>
-      <Button style={styles.button} variant="contained" onClick={continueButton}>
+      <Button style={styles.button} variant="contained" onClick={continueClick}>
         Continue
       </Button>
     </>

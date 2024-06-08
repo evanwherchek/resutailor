@@ -34,7 +34,7 @@ const styles: Style = {
   },
 };
 
-const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick: findSkills, copyAndPasteClick: copyAndPaste }) => {
+const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick: findSkills, copyAn
 
   const checkField = (value: string) => {
     if (validator.isURL(value)) {
-      findSkills();
+      findSkillsClick();
     } else {
       setOpen(true);
     }
@@ -74,7 +74,7 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick: findSkills, copyAn
       <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)}>
         Find skills
       </Button>
-      <Button style={styles.textButton} variant="text" onClick={copyAndPaste}>
+      <Button style={styles.textButton} variant="text" onClick={copyAndPasteClick}>
         Copy and paste instead
       </Button>
       <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} message="Please enter a valid URL." />

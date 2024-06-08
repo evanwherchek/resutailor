@@ -1,6 +1,8 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
+import validator from 'validator';
 
 interface Style {
   label: React.CSSProperties;
@@ -39,11 +41,28 @@ const styles: Style = {
   },
 };
 
-const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick: findSkills, backClick: back }) => {
+const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClick }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextFieldValue(event.target.value);
+  };
+
+  const checkField = (value: string) => {
+    if (validator.isURL(value)) {
+      findSkillsClick();
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -61,12 +80,13 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick: findSkil
         value={textFieldValue}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={findSkills}>
+      <Button style={styles.button} variant="contained" onClick={() => checkField}>
         Find skills
       </Button>
-      <Button style={styles.textButton} variant="text" onClick={back}>
+      <Button style={styles.textButton} variant="text" onClick={backClick}>
         Back
       </Button>
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} message="Please enter a valid URL." />
     </>
   );
 };

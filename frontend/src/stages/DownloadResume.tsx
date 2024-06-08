@@ -41,7 +41,7 @@ const styles: Style = {
   },
 };
 
-const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick: newResume }) => {
+const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick }) => {
   return (
     <>
       <p style={styles.mainText}>All done!</p>
@@ -49,7 +49,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick: newResu
       <Button style={styles.button} startIcon={<DownloadIcon />} variant="contained" onClick={() => {}}>
         Resume_EvanHerchek_AmericanAirlines.docx
       </Button>
-      <Button style={styles.textButton} variant="text" onClick={newResume}>
+      <Button style={styles.textButton} variant="text" onClick={newResumeClick}>
         New resume
       </Button>
     </>
