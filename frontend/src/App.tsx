@@ -42,7 +42,7 @@ function App() {
     <div style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkills={goToSelectSkills} copyAndPaste={goToEnterManually} />}
       {stage === 2 && <EnterManually findSkills={goToSelectSkills} back={goToEnterUrl} />}
-      {stage === 3 && <SelectSkills continueButton={goToDownloadResume}/>}
+      {stage === 3 && <SelectSkills continueButton={goToDownloadResume} />}
       {stage === 4 && <DownloadResume />}
     </div>
   );
