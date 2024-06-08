@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 
 interface DownloadResumeProps {
-  newResume: () => void;
+  newResumeClick: () => void;
 }
 
 interface Style {
@@ -41,7 +41,7 @@ const styles: Style = {
   },
 };
 
-const DownloadResume: React.FC<DownloadResumeProps> = ({ newResume }) => {
+const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick: newResume }) => {
   return (
     <>
       <p style={styles.mainText}>All done!</p>

@@ -10,8 +10,8 @@ interface Style {
 }
 
 interface EnterManuallyProps {
-  findSkills: () => void;
-  back: () => void;
+  findSkillsClick: () => void;
+  backClick: () => void;
 }
 
 const styles: Style = {
@@ -39,7 +39,7 @@ const styles: Style = {
   },
 };
 
-const EnterManually: React.FC<EnterManuallyProps> = ({ findSkills, back }) => {
+const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick: findSkills, backClick: back }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -11,8 +11,8 @@ interface Style {
 }
 
 interface EnterUrlProps {
-  findSkills: () => void;
-  copyAndPaste: () => void;
+  findSkillsClick: () => void;
+  copyAndPasteClick: () => void;
 }
 
 const styles: Style = {
@@ -34,7 +34,7 @@ const styles: Style = {
   },
 };
 
-const EnterUrl: React.FC<EnterUrlProps> = ({ findSkills, copyAndPaste }) => {
+const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick: findSkills, copyAndPasteClick: copyAndPaste }) => {
   const [textFieldValue, setTextFieldValue] = useState('');
   const [open, setOpen] = useState(false);
 

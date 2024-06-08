@@ -40,10 +40,10 @@ function App() {
 
   return (
     <div style={styles.backdrop}>
-      {stage === 1 && <EnterUrl findSkills={goToSelectSkills} copyAndPaste={goToEnterManually} />}
-      {stage === 2 && <EnterManually findSkills={goToSelectSkills} back={goToEnterUrl} />}
-      {stage === 3 && <SelectSkills continueButton={goToDownloadResume} />}
-      {stage === 4 && <DownloadResume newResume={goToEnterUrl} />}
+      {stage === 1 && <EnterUrl findSkillsClick={goToSelectSkills} copyAndPasteClick={goToEnterManually} />}
+      {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
+      {stage === 3 && <SelectSkills continueClick={goToDownloadResume} />}
+      {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} />}
     </div>
   );
 }
