@@ -50,7 +50,7 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClic
   };
 
   const checkField = (value: string) => {
-    if (!validator.isEmpty(value)) {
+    if (!validator.isEmpty(value.trim())) {
       findSkillsClick();
     } else {
       setOpen(true);
