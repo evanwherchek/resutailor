@@ -20,7 +20,7 @@ const styles: Style = {
 };
 
 function App() {
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(4);
 
   const goToEnterUrl = () => {
     setStage(1);
@@ -43,7 +43,7 @@ function App() {
       {stage === 1 && <EnterUrl findSkills={goToSelectSkills} copyAndPaste={goToEnterManually} />}
       {stage === 2 && <EnterManually findSkills={goToSelectSkills} back={goToEnterUrl} />}
       {stage === 3 && <SelectSkills continueButton={goToDownloadResume} />}
-      {stage === 4 && <DownloadResume />}
+      {stage === 4 && <DownloadResume newResume={goToEnterUrl} />}
     </div>
   );
 }

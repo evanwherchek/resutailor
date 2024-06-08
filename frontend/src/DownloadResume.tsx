@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Chip, Button } from '@mui/material';
+import { Button } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
 
-interface DownloadResumeProps {}
+interface DownloadResumeProps {
+  newResume: () => void;
+}
 
 interface Style {
   mainText: React.CSSProperties;
   subText: React.CSSProperties;
   button: React.CSSProperties;
+  textButton: React.CSSProperties;
 }
 
 const styles: Style = {
@@ -28,17 +31,24 @@ const styles: Style = {
   button: {
     borderRadius: '25px',
     textTransform: 'none',
-    margin: '25px',
+  },
+  textButton: {
+    color: '#FFFFFF',
+    textTransform: 'none',
+    textDecoration: 'underline',
   },
 };
 
-const DownloadResume: React.FC<DownloadResumeProps> = () => {
+const DownloadResume: React.FC<DownloadResumeProps> = ({ newResume }) => {
   return (
     <>
       <p style={styles.mainText}>All done!</p>
       <p style={styles.subText}>Your tailored resume is below.</p>
-      <Button style={styles.button} variant="contained" onClick={() => {}}>
-        Download
+      <Button style={styles.button} startIcon={<DownloadIcon />} variant="contained" onClick={() => {}}>
+        Resume_EvanHerchek_AmericanAirlines.docx
+      </Button>
+      <Button style={styles.textButton} variant="text" onClick={newResume}>
+        New resume
       </Button>
     </>
   );
