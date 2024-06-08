@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Chip } from '@mui/material';
+import { Chip, Button } from '@mui/material';
 
 interface SelectSkillsProps {}
 
@@ -8,6 +8,8 @@ interface Style {
   subText: React.CSSProperties;
   unselectedChip: React.CSSProperties;
   selectedChip: React.CSSProperties;
+  chipContainer: React.CSSProperties;
+  button: React.CSSProperties;
 }
 
 interface ChipData {
@@ -20,22 +22,45 @@ interface ChipData {
 const styles: Style = {
   mainText: {
     color: '#FFFFFF',
-    fontSize: '75px',
+    fontSize: '60px',
     textAlign: 'center',
     width: '80%',
     fontWeight: 'bold',
+    marginBottom: '20px'
   },
   subText: {
     color: '#FFFFFF',
     fontSize: '30px',
     textAlign: 'center',
     width: '80%',
+    marginTop: '10px'
   },
   selectedChip: {
-    color: '#000000',
+    color: '#FFFFFF',
+    background: '#000000',
+    margin: '10px',
+    fontSize: '20px',
+    padding: '10px'
   },
   unselectedChip: {
-    color: '#FFFFFF',
+    color: '#000000',
+    background: '#FFFFFF',
+    margin: '10px',
+    fontSize: '20px',
+    padding: '10px'
+  },
+  chipContainer: {
+    width: '60%',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    borderRadius: '25px',
+    textTransform: 'none',
+    margin: '25px'
   },
 };
 
@@ -70,16 +95,21 @@ const SelectSkills: React.FC<SelectSkillsProps> = () => {
       setChipList(newChipList);
     };
 
-    populateList('{"skills": ["Java", "Python", "AWS", "Kubernetes"]}');
+    populateList('{"skills": ["Java", "Python", "AWS", "Kubernetes", "Docker", "GCP", "data structures", "C++", "OOP", "concurrency"]}');
   }, []);
 
   return (
     <>
-      <p style={styles.mainText}>12 skills found</p>
+      <p style={styles.mainText}>{chipList.length} skills found</p>
       <p style={styles.subText}>Which of the following do you have?</p>
-      {chipList.map((data) => {
-        return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
-      })}
+      <div style={styles.chipContainer}>
+        {chipList.map((data) => {
+          return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
+        })}
+      </div>
+      <Button style={styles.button} variant="contained" onClick={() => {}}>
+        Find skills
+      </Button>
     </>
   );
 };
