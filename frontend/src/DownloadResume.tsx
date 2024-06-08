@@ -19,23 +19,25 @@ const styles: Style = {
     textAlign: 'center',
     width: '80%',
     fontWeight: 'bold',
-    marginBottom: '20px',
+    margin: '15px'
   },
   subText: {
     color: '#FFFFFF',
     fontSize: '30px',
     textAlign: 'center',
     width: '80%',
-    marginTop: '10px',
+    margin: '15px'
   },
   button: {
     borderRadius: '25px',
     textTransform: 'none',
+    margin: '15px'
   },
   textButton: {
     color: '#FFFFFF',
     textTransform: 'none',
     textDecoration: 'underline',
+    margin: '15px'
   },
 };
 
