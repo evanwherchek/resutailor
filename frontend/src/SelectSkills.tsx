@@ -28,14 +28,14 @@ const styles: Style = {
     textAlign: 'center',
     width: '80%',
     fontWeight: 'bold',
-    margin: '15px'
+    margin: '15px',
   },
   subText: {
     color: '#FFFFFF',
     fontSize: '30px',
     textAlign: 'center',
     width: '80%',
-    margin: '15px'
+    margin: '15px',
   },
   selectedChip: {
     color: '#FFFFFF',
@@ -62,7 +62,7 @@ const styles: Style = {
   button: {
     borderRadius: '25px',
     textTransform: 'none',
-    margin: '15px'
+    margin: '15px',
   },
 };
 
