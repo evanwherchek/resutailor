@@ -6,5 +6,5 @@ describe('App', () => {
     render(<App />);
 
     expect(screen.getByTestId('parent')).toBeInTheDocument();
-  })
+  });
 });
