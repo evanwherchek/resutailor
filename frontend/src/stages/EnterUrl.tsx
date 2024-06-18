@@ -13,6 +13,8 @@ interface Style {
 interface EnterUrlProps {
   findSkillsClick: () => void;
   copyAndPasteClick: () => void;
+  url: string;
+  setUrl: (url: string) => void;
 }
 
 const styles: Style = {
@@ -34,16 +36,16 @@ const styles: Style = {
   },
 };
 
-const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick }) => {
-  const [textFieldValue, setTextFieldValue] = useState('');
+const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick, url, setUrl }) => {
   const [open, setOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTextFieldValue(event.target.value);
+    setUrl(event.target.value);
   };
 
   const checkField = (value: string) => {
     if (validator.isURL(value)) {
+      setUrl(value);
       findSkillsClick();
     } else {
       setOpen(true);
@@ -68,10 +70,10 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick 
         InputProps={{
           disableUnderline: true,
         }}
-        value={textFieldValue}
+        value={url}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)}>
+      <Button style={styles.button} variant="contained" onClick={() => checkField(url)}>
         Find skills
       </Button>
       <Button style={styles.textButton} variant="text" onClick={copyAndPasteClick}>

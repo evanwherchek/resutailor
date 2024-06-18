@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from openai import OpenAI, _exceptions
 from dotenv import load_dotenv
 from docx import Document
+from flask_cors import CORS
 import docxedit
 import json
 
@@ -19,11 +20,12 @@ PROMPT = ("Given the text from a job description, "
           "The job description will begin after the 'BEGIN DESCRIPTION:'. BEGIN DESCRIPTION: ")
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/parseSkills')
 def parse_skills():
     """Takes the job listing URL, extracts the skills from it, and returns a list"""
-    url = request.args.get('postingURL', 'missing')
+    url = request.args.get('postingUrl', 'missing')
 
     load_dotenv()
 

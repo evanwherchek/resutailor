@@ -47,7 +47,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick }) => {
       <p style={styles.mainText}>All done!</p>
       <p style={styles.subText}>Your tailored resume is below.</p>
       <Button style={styles.button} startIcon={<DownloadIcon />} variant="contained" onClick={() => {}}>
-        Resume_EvanHerchek_AmericanAirlines.docx
+        Resume_EvanHerchek.docx
       </Button>
       <Button style={styles.textButton} variant="text" onClick={newResumeClick}>
         New resume
