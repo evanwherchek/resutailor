@@ -5,6 +5,7 @@ import SelectSkills from './stages/SelectSkills';
 import DownloadResume from './stages/DownloadResume';
 import axios from 'axios';
 import { encode } from 'urlencode';
+import LoadingOverlay from './stages/LoadingOverlay';
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -28,15 +29,13 @@ function App() {
   function requestSkillsList() {
     axios.get('http://127.0.0.1:5000/parseSkills?postingUrl=' + encode(url))
       .then(function (response) {
-        // handle success
         console.log(response);
+        setStage(3);
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
       .finally(function () {
-        // always executed
       });
   };
 
@@ -49,10 +48,9 @@ function App() {
   };
 
   const goToSelectSkills = () => {
-    console.log('URL: ' + url);
-    requestSkillsList();
+    setStage(5);
 
-    setStage(3);
+    requestSkillsList();
   };
 
   const goToDownloadResume = () => {
@@ -65,6 +63,7 @@ function App() {
       {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
       {stage === 3 && <SelectSkills continueClick={goToDownloadResume} />}
       {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} />}
+      {stage === 5 && <LoadingOverlay message='Finding skills...'/>}
     </div>
   );
 }
