@@ -1,4 +1,4 @@
-import { FireworkSpinner } from "react-spinners-kit";
+import { FireworkSpinner } from 'react-spinners-kit';
 
 interface LoadingOverlayProps {
   message: string;
@@ -10,9 +10,9 @@ interface Style {
 
 const styles: Style = {
   message: {
-    color: '#FFFFFF'
-  }
-}
+    color: '#FFFFFF',
+  },
+};
 
 const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ message }) => {
   return (
