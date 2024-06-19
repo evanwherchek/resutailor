@@ -1,6 +1,6 @@
 import { FireworkSpinner } from 'react-spinners-kit';
 
-interface LoadingOverlayProps {
+interface LoadingScreenProps {
   message: string;
 }
 
@@ -14,7 +14,7 @@ const styles: Style = {
   },
 };
 
-const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ message }) => {
+const LoadingScreen: React.FC<LoadingScreenProps> = ({ message }) => {
   return (
     <>
       <FireworkSpinner size={50} color="#FFFFFF" loading={true} />
@@ -23,4 +23,4 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ message }) => {
   );
 };
 
-export default LoadingOverlay;
+export default LoadingScreen;

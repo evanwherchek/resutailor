@@ -5,7 +5,8 @@ import SelectSkills from './stages/SelectSkills';
 import DownloadResume from './stages/DownloadResume';
 import axios from 'axios';
 import { encode } from 'urlencode';
-import LoadingOverlay from './stages/LoadingOverlay';
+import LoadingScreen from './stages/LoadingOverlay';
+import ErrorScreen from './stages/ErrorScreen';
 
 interface Style {
   backdrop: React.CSSProperties;
@@ -23,21 +24,23 @@ const styles: Style = {
 };
 
 function App() {
-  const [stage, setStage] = useState(1);
-  const [url, setUrl] = useState('');
-  const [skills, setSkills] = useState('');
+  const [stage, setStage] = useState<number>(1);
+  const [url, setUrl] = useState<string>('');
+  const [skills, setSkills] = useState<string>('');
+  const [response, setResposne] = useState<number>(0);
 
   function requestSkillsList() {
+    goToLoadingScreen();
+
     axios.get('http://127.0.0.1:5000/parseSkills?postingUrl=' + encode(url))
       .then(function (response) {
         setSkills(JSON.stringify(response.data));
 
-        setStage(3);
+        goToSelectSkills();
       })
       .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
+        setResposne(error.response.status);
+        goToErrorScreen();
       });
   };
 
@@ -50,22 +53,29 @@ function App() {
   };
 
   const goToSelectSkills = () => {
-    setStage(5);
-
-    requestSkillsList();
+    setStage(3);
   };
 
   const goToDownloadResume = () => {
     setStage(4);
   };
 
+  const goToLoadingScreen = () => {
+    setStage(5);
+  }
+
+  const goToErrorScreen = () => {
+    setStage(6);
+  };
+
   return (
     <div data-testid='parent' style={styles.backdrop}>
-      {stage === 1 && <EnterUrl findSkillsClick={goToSelectSkills} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
+      {stage === 1 && <EnterUrl findSkillsClick={requestSkillsList} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
       {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
       {stage === 3 && <SelectSkills continueClick={goToDownloadResume} skills={skills} />}
       {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} />}
-      {stage === 5 && <LoadingOverlay message='Finding skills...'/>}
+      {stage === 5 && <LoadingScreen message='Finding skills...' />}
+      {stage === 6 && <ErrorScreen response={response} tryAgainClick={goToEnterUrl} />}
     </div>
   );
 }

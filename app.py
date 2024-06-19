@@ -22,7 +22,7 @@ PROMPT = ("Given the text from a job description, "
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/parseSkills')
+@app.route('/parseSkills', methods=['GET'])
 def parse_skills():
     """Takes the job listing URL, extracts the skills from it, and returns a list"""
     url = request.args.get('postingUrl', 'missing')
@@ -54,7 +54,7 @@ def parse_skills():
             )
 
             return completion.choices[0].message.content
-        except _exceptions.BadRequestError as e:
+        except _exceptions.RateLimitError as e:
             abort(413) # Context window exceeded
         except _exceptions.APITimeoutError as e:
             abort(408) # OpenAI timeout
