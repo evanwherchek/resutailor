@@ -25,11 +25,13 @@ const styles: Style = {
 function App() {
   const [stage, setStage] = useState(1);
   const [url, setUrl] = useState('');
+  const [skills, setSkills] = useState('');
 
   function requestSkillsList() {
     axios.get('http://127.0.0.1:5000/parseSkills?postingUrl=' + encode(url))
       .then(function (response) {
-        console.log(response);
+        setSkills(JSON.stringify(response.data));
+
         setStage(3);
       })
       .catch(function (error) {
@@ -61,7 +63,7 @@ function App() {
     <div data-testid='parent' style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkillsClick={goToSelectSkills} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
       {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
-      {stage === 3 && <SelectSkills continueClick={goToDownloadResume} />}
+      {stage === 3 && <SelectSkills continueClick={goToDownloadResume} skills={skills} />}
       {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} />}
       {stage === 5 && <LoadingOverlay message='Finding skills...'/>}
     </div>

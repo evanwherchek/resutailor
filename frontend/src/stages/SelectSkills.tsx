@@ -3,6 +3,7 @@ import { Chip, Button } from '@mui/material';
 
 interface SelectSkillsProps {
   continueClick: () => void;
+  skills: string;
 }
 
 interface Style {
@@ -66,7 +67,7 @@ const styles: Style = {
   },
 };
 
-const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick }) => {
+const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, skills }) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
@@ -97,9 +98,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick }) => {
       setChipList(newChipList);
     };
 
-    populateList(
-      '{"skills": ["Java", "Python", "AWS", "Kubernetes", "Docker", "GCP", "data structures", "C++", "OOP", "concurrency"]}',
-    );
+    populateList(skills);
   }, []);
 
   return (
