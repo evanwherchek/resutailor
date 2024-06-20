@@ -71,7 +71,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, skills }) =>
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
-    setChipList((prevChipList) => {
+    setChipList((prevChipList: ChipData[]) => {
       return prevChipList.map((chip) => {
         if (chip.key === data.key) {
           return {
@@ -86,18 +86,18 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, skills }) =>
     });
   };
 
+  const populateList = (jsonString: string) => {
+    const jsonObject: any = JSON.parse(jsonString);
+    const newChipList = [];
+
+    for (let i = 0; i < jsonObject.skills.length; i++) {
+      newChipList.push({ key: i, label: jsonObject.skills[i], style: styles.unselectedChip, selected: false });
+    }
+
+    setChipList(newChipList);
+  };
+
   useEffect(() => {
-    const populateList = (jsonString: string) => {
-      const jsonObject: any = JSON.parse(jsonString);
-      const newChipList = [];
-
-      for (let i = 0; i < jsonObject.skills.length; i++) {
-        newChipList.push({ key: i, label: jsonObject.skills[i], style: styles.unselectedChip, selected: false });
-      }
-
-      setChipList(newChipList);
-    };
-
     populateList(skills);
   }, []);
 

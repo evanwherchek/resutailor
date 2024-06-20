@@ -37,9 +37,12 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({ response, tryAgainClick }) =>
   return (
     <>
       <p style={styles.mainText}>Error {response}</p>
-      {response === 408 && <p style={styles.subText}>OpenAI timeout.</p>}
-      {response === 413 && <p style={styles.subText}>Context window exceeded.</p>}
-      {response === 422 && <p style={styles.subText}>Unprocessable content.</p>}
+      <p style={styles.subText}>
+        {response === 408 ? 'OpenAI timeout.' : 
+          response === 413 ? 'Context window exceeded.' : 
+          response === 422 ? 'Unprocessable content.' : 
+          'An unknown error occurred.'}
+      </p>
       <Button style={styles.button} variant="contained" onClick={tryAgainClick}>
         Try again
       </Button>
