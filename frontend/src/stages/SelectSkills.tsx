@@ -129,12 +129,12 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
   const checkInputs = () => {
     updateSelected();
 
-    if(selectedSkills.length != 0){
+    if (selectedSkills.length != 0) {
       continueClick();
-    }else{
+    } else {
       setOpen(true);
     }
-  }
+  };
 
   useEffect(() => {
     populateList(foundSkills);
