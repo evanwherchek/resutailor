@@ -61,6 +61,8 @@ const styles: Style = {
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
+    maxHeight: '400px',
+    overflowY: 'auto',
   },
   button: {
     borderRadius: '25px',
@@ -99,16 +101,16 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, foundSkills,
   };
 
   const updateSelected = () => {
-    const newSelectedSkills = chipList.reduce((acc, chip) => {
+    const newSelectedSkills = chipList.reduce((acc: string[], chip) => {
       if (chip.selected) {
         acc.push(chip.label);
       }
       return acc;
-    }, [...selectedSkills]);
-    
+    }, []);
+
     setSelectedSkills(newSelectedSkills);
     console.log(newSelectedSkills);
-  }
+}
 
   useEffect(() => {
     populateList(foundSkills);
