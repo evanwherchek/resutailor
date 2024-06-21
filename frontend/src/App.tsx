@@ -28,7 +28,8 @@ function App() {
   const [url, setUrl] = useState<string>('');
   const [foundSkills, setFoundSkills] = useState<string[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-  const [response, setResposne] = useState<number>(0);
+  const [response, setResponse] = useState<number>(0);
+  const [file, setFile] = useState<Blob | null>(null);
 
   function requestSkillsList() {
     goToLoadingScreen();
@@ -40,10 +41,26 @@ function App() {
         goToSelectSkills();
       })
       .catch(function (error) {
-        setResposne(error.response.status);
+        setResponse(error.response.status);
         goToErrorScreen();
       });
   };
+
+  function requestDocumentEdit() {
+    goToLoadingScreen();
+
+    axios.post('http://127.0.0.1:5000/appendSkills', { skills: selectedSkills }, { responseType: 'blob' })
+    .then((response) => {
+      const receivedFile = new Blob([response.data], { type: 'application/msword' });
+      setFile(receivedFile);
+
+      goToDownloadResume();
+    })
+    .catch(function (error) {
+        setResponse(error.response.status);
+        goToErrorScreen();
+    });
+}
 
   const goToEnterUrl = () => {
     setStage(1);
@@ -73,8 +90,8 @@ function App() {
     <div data-testid='parent' style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkillsClick={requestSkillsList} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
       {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
-      {stage === 3 && <SelectSkills continueClick={goToDownloadResume} foundSkills={foundSkills} selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />}
-      {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} />}
+      {stage === 3 && <SelectSkills continueClick={requestDocumentEdit} foundSkills={foundSkills} selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />}
+      {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} file={file} />}
       {stage === 5 && <LoadingScreen message='Finding skills...' />}
       {stage === 6 && <ErrorScreen response={response} tryAgainClick={goToEnterUrl} />}
     </div>

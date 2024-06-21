@@ -1,7 +1,7 @@
 """The backend service that parses job listings and edits .docx files"""
 
 import os
-from flask import Flask, request, abort
+from flask import Flask, request, abort, send_file
 import validators
 import requests
 from bs4 import BeautifulSoup
@@ -61,24 +61,24 @@ def parse_skills():
     else:
         abort(400)
 
-@app.route('/appendSkills')
+@app.route('/appendSkills', methods=['POST'])
 def append_skills():
     file_name = 'ResumeTemplate.docx'
-    skills = json.loads('{\"skills\": [\"programming\", \"communication\"]}')
+    skills = request.get_json().get('skills', [])
 
-    print('Editing...')
     document = Document(docx=file_name)
 
     replacement_line = ''
 
-    for skill in skills['skills']:
+    for skill in skills:
         replacement_line = replacement_line + skill + ", "
 
     docxedit.replace_string(document, old_string='[EDIT HERE]', new_string=replacement_line)
 
-    document.save('Edited.docx')
+    edited_file_name = 'Edited.docx'
+    document.save(edited_file_name)
 
-    return 'Done!'
+    return send_file(edited_file_name, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
