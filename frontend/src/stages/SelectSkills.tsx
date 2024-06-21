@@ -106,19 +106,16 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
   };
 
   const updateSelected = () => {
-    const newSelectedSkills = chipList.reduce(
-      (acc, chip) => {
-        if (chip.selected) {
-          acc.push(chip.label);
-        }
-        return acc;
-      },
-      [...selectedSkills],
-    );
+    const newSelectedSkills = chipList.reduce((acc: string[], chip) => {
+      if (chip.selected) {
+        acc.push(chip.label);
+      }
+      return acc;
+    }, []);
 
     setSelectedSkills(newSelectedSkills);
     console.log(newSelectedSkills);
-  };
+  }
 
   useEffect(() => {
     populateList(foundSkills);
