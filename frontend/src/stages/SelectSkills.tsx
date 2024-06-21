@@ -115,7 +115,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
 
     setSelectedSkills(newSelectedSkills);
     console.log(newSelectedSkills);
-  }
+  };
 
   useEffect(() => {
     populateList(foundSkills);
