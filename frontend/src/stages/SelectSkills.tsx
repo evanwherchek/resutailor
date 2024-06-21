@@ -71,7 +71,12 @@ const styles: Style = {
   },
 };
 
-const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, foundSkills, selectedSkills, setSelectedSkills }) => {
+const SelectSkills: React.FC<SelectSkillsProps> = ({
+  continueClick,
+  foundSkills,
+  selectedSkills,
+  setSelectedSkills,
+}) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
@@ -101,16 +106,16 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, foundSkills,
   };
 
   const updateSelected = () => {
-    const newSelectedSkills = chipList.reduce((acc: string[], chip) => {
+    const newSelectedSkills = chipList.reduce((acc, chip) => {
       if (chip.selected) {
         acc.push(chip.label);
       }
       return acc;
-    }, []);
-
+    }, [...selectedSkills]);
+    
     setSelectedSkills(newSelectedSkills);
     console.log(newSelectedSkills);
-}
+  }
 
   useEffect(() => {
     populateList(foundSkills);
