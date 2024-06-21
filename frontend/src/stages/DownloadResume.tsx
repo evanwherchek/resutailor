@@ -46,7 +46,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick, file })
   const handleDownload = () => {
     const blob = file;
 
-    if(blob !== null){
+    if (blob !== null) {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
