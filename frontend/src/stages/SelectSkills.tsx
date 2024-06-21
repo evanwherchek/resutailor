@@ -3,7 +3,9 @@ import { Chip, Button } from '@mui/material';
 
 interface SelectSkillsProps {
   continueClick: () => void;
-  skills: string;
+  foundSkills: string[];
+  selectedSkills: string[];
+  setSelectedSkills: (skills: string[]) => void;
 }
 
 interface Style {
@@ -67,7 +69,7 @@ const styles: Style = {
   },
 };
 
-const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, skills }) => {
+const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, foundSkills, selectedSkills, setSelectedSkills }) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
 
   const handleChipClick = (data: ChipData) => {
@@ -86,19 +88,30 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, skills }) =>
     });
   };
 
-  const populateList = (jsonString: string) => {
-    const jsonObject: any = JSON.parse(jsonString);
+  const populateList = (skills: string[]) => {
     const newChipList = [];
 
-    for (let i = 0; i < jsonObject.skills.length; i++) {
-      newChipList.push({ key: i, label: jsonObject.skills[i], style: styles.unselectedChip, selected: false });
+    for (let i = 0; i < skills.length; i++) {
+      newChipList.push({ key: i, label: skills[i], style: styles.unselectedChip, selected: false });
     }
 
     setChipList(newChipList);
   };
 
+  const updateSelected = () => {
+    const newSelectedSkills = chipList.reduce((acc, chip) => {
+      if (chip.selected) {
+        acc.push(chip.label);
+      }
+      return acc;
+    }, [...selectedSkills]);
+    
+    setSelectedSkills(newSelectedSkills);
+    console.log(newSelectedSkills);
+  }
+
   useEffect(() => {
-    populateList(skills);
+    populateList(foundSkills);
   }, []);
 
   return (
@@ -110,7 +123,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({ continueClick, skills }) =>
           return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
         })}
       </div>
-      <Button style={styles.button} variant="contained" onClick={continueClick}>
+      <Button style={styles.button} variant="contained" onClick={updateSelected}>
         Continue
       </Button>
     </>

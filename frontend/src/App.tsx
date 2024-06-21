@@ -26,7 +26,8 @@ const styles: Style = {
 function App() {
   const [stage, setStage] = useState<number>(1);
   const [url, setUrl] = useState<string>('');
-  const [skills, setSkills] = useState<string>('');
+  const [foundSkills, setFoundSkills] = useState<string[]>([]);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [response, setResposne] = useState<number>(0);
 
   function requestSkillsList() {
@@ -34,7 +35,7 @@ function App() {
 
     axios.get('http://127.0.0.1:5000/parseSkills?postingUrl=' + encode(url))
       .then(function (response) {
-        setSkills(JSON.stringify(response.data));
+        setFoundSkills(response.data['skills']);
 
         goToSelectSkills();
       })
@@ -72,7 +73,7 @@ function App() {
     <div data-testid='parent' style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkillsClick={requestSkillsList} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
       {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
-      {stage === 3 && <SelectSkills continueClick={goToDownloadResume} skills={skills} />}
+      {stage === 3 && <SelectSkills continueClick={goToDownloadResume} foundSkills={foundSkills} selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />}
       {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} />}
       {stage === 5 && <LoadingScreen message='Finding skills...' />}
       {stage === 6 && <ErrorScreen response={response} tryAgainClick={goToEnterUrl} />}
