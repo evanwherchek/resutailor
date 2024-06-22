@@ -53,9 +53,9 @@ def parse_skills():
             )
 
             return completion.choices[0].message.content
-        except _exceptions.RateLimitError as e:
+        except _exceptions.RateLimitError:
             abort(413) # Context window exceeded
-        except _exceptions.APITimeoutError as e:
+        except _exceptions.APITimeoutError:
             abort(408) # OpenAI timeout
     else:
         abort(400)
