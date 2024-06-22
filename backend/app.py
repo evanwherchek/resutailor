@@ -1,14 +1,15 @@
 """The backend service that parses job listings and edits .docx files"""
 
 import os
-from flask import Flask, request, abort, send_file
-import validators
-import requests
-from bs4 import BeautifulSoup
+
+from flask import Flask, request, send_file
+from flask_cors import CORS
 from openai import OpenAI, _exceptions
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from docx import Document
-from flask_cors import CORS
+import validators
+import requests
 import docxedit
 
 PROMPT = ("Given the text from a job description, "
@@ -20,6 +21,7 @@ PROMPT = ("Given the text from a job description, "
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route('/parseSkills', methods=['GET'])
 def parse_skills():
@@ -37,7 +39,7 @@ def parse_skills():
         soup = BeautifulSoup(response.text, 'html.parser')
 
         if soup.get_text() == '':
-            abort(422) # Unprocessable content
+            return {"error": "Unprocessable content"}, 422
 
         try:
             completion = client.chat.completions.create(
@@ -54,14 +56,16 @@ def parse_skills():
 
             return completion.choices[0].message.content
         except _exceptions.RateLimitError:
-            abort(413) # Context window exceeded
+            return {"error": "Context window exceeded"}, 413
         except _exceptions.APITimeoutError:
-            abort(408) # OpenAI timeout
+            return {"error": "OpenAI timeout"}, 408
     else:
-        abort(400)
+        return {"error": "Bad request"}, 400
 
 @app.route('/appendSkills', methods=['POST'])
 def append_skills():
+    """Appends a list of skills to a resume"""
+
     file_name = 'ResumeTemplate.docx'
     skills = request.get_json().get('skills', [])
 
@@ -75,7 +79,6 @@ def append_skills():
     docxedit.replace_string(document, old_string='[EDIT HERE]', new_string=replacement_line)
 
     edited_file_name = 'Edited.docx'
-    document.save(edited_file_name)
 
     return send_file(edited_file_name, as_attachment=True)
 
