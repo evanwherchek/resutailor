@@ -22,10 +22,10 @@ PROMPT = ("Given the text from a job description, "
 app = Flask(__name__)
 CORS(app)
 
-
 @app.route('/parseSkills', methods=['GET'])
 def parse_skills():
     """Takes the job listing URL, extracts the skills from it, and returns a list"""
+
     url = request.args.get('postingUrl', 'missing')
 
     load_dotenv()
@@ -39,7 +39,7 @@ def parse_skills():
         soup = BeautifulSoup(response.text, 'html.parser')
 
         if soup.get_text() == '':
-            return {"error": "Unprocessable content"}, 422
+            return {'error': 'Unprocessable content'}, 422
 
         try:
             completion = client.chat.completions.create(
@@ -56,25 +56,34 @@ def parse_skills():
 
             return completion.choices[0].message.content
         except _exceptions.RateLimitError:
-            return {"error": "Context window exceeded"}, 413
+            return {'error': 'Context window exceeded'}, 413
         except _exceptions.APITimeoutError:
-            return {"error": "OpenAI timeout"}, 408
+            return {'error': 'OpenAI timeout'}, 408
     else:
-        return {"error": "Bad request"}, 400
+        return {'error': 'Bad request'}, 400
 
 @app.route('/appendSkills', methods=['POST'])
 def append_skills():
     """Appends a list of skills to a resume"""
 
-    file_name = 'ResumeTemplate.docx'
     skills = request.get_json().get('skills', [])
+
+    if not skills:
+        return {'error': 'Unprocessable content'}, 422
+
+    file_name = 'ResumeTemplate.docx'
+
+    if not os.path.exists(file_name):
+        return {'error': 'File ' + file_name + ' not found'}, 404
 
     document = Document(docx=file_name)
 
     replacement_line = ''
 
-    for skill in skills:
-        replacement_line = replacement_line + skill + ", "
+    for index, skill in enumerate(skills):
+        replacement_line += skill
+        if index != len(skills) - 1:
+            replacement_line += ', '
 
     docxedit.replace_string(document, old_string='[EDIT HERE]', new_string=replacement_line)
 
