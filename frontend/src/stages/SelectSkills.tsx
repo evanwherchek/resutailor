@@ -80,6 +80,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
 }) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
   const [open, setOpen] = useState(false);
+  const [continueClicked, setContinueClicked] = useState(false);
 
   const handleChipClick = (data: ChipData) => {
     setChipList((prevChipList: ChipData[]) => {
@@ -116,6 +117,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     }, []);
 
     setSelectedSkills(newSelectedSkills);
+    setContinueClicked(true);
   };
 
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -126,15 +128,15 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     setOpen(false);
   };
 
-  const checkInputs = () => {
-    updateSelected();
-
-    if (selectedSkills.length != 0) {
-      continueClick();
-    } else {
-      setOpen(true);
+  useEffect(() => {
+    if (continueClicked) {
+      if (selectedSkills.length > 0) {
+        continueClick();
+      } else {
+        setOpen(true);
+      }
     }
-  };
+  }, [selectedSkills, continueClicked]);
 
   useEffect(() => {
     populateList(foundSkills);
@@ -149,7 +151,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
           return <Chip key={data.key} label={data.label} style={data.style} onClick={() => handleChipClick(data)} />;
         })}
       </div>
-      <Button style={styles.button} variant="contained" onClick={checkInputs}>
+      <Button style={styles.button} variant="contained" onClick={updateSelected}>
         Continue
       </Button>
       <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} message="Please select at least one skill." />
