@@ -78,6 +78,11 @@ def append_skills():
 
     document = Document(docx=file_name)
 
+    full_text = ' '.join([paragraph.text for paragraph in document.paragraphs])
+
+    if '[EDIT HERE]' not in full_text:
+        return {'error': 'Missing edit tag in template'}, 422
+
     replacement_line = ''
 
     for index, skill in enumerate(skills):
@@ -87,9 +92,10 @@ def append_skills():
 
     docxedit.replace_string(document, old_string='[EDIT HERE]', new_string=replacement_line)
 
-    edited_file_name = 'Edited.docx'
+    new_file_name = 'Edited.docx'
+    document.save(new_file_name)
 
-    return send_file(edited_file_name, as_attachment=True)
+    return send_file(new_file_name, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
