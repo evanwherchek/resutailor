@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import EnterManually from './stages/EnterManually';
-import EnterUrl from './stages/EnterUrl';
-import SelectSkills from './stages/SelectSkills';
-import DownloadResume from './stages/DownloadResume';
 import axios from 'axios';
 import { encode } from 'urlencode';
-import LoadingScreen from './stages/LoadingOverlay';
+
+import DownloadResume from './stages/DownloadResume';
+import EnterManually from './stages/EnterManually';
+import EnterUrl from './stages/EnterUrl';
 import ErrorScreen from './stages/ErrorScreen';
+import LoadingScreen from './stages/LoadingOverlay';
+import SelectSkills from './stages/SelectSkills';
 
 interface Style {
   backdrop: React.CSSProperties;
