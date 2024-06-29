@@ -26,6 +26,7 @@ const styles: Style = {
 function App() {
   const [stage, setStage] = useState<number>(1);
   const [url, setUrl] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [foundSkills, setFoundSkills] = useState<string[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [response, setResponse] = useState<number>(0);
@@ -46,21 +47,36 @@ function App() {
       });
   };
 
+  function requestSkillsFromText() {
+    goToLoadingScreen();
+
+    axios.post('http://127.0.0.1:5000/parseFromText', { description: description })
+      .then(function (response) {
+        setFoundSkills(response.data['skills']);
+
+        goToSelectSkills();
+      })
+      .catch(function (error) {
+        setResponse(error.response.status);
+        goToErrorScreen();
+      });
+  }
+
   function requestDocumentEdit() {
     goToLoadingScreen();
 
     axios.post('http://127.0.0.1:5000/appendSkills', { skills: selectedSkills }, { responseType: 'blob' })
-    .then((response) => {
-      const receivedFile = new Blob([response.data], { type: 'application/msword' });
-      setFile(receivedFile);
+      .then((response) => {
+        const receivedFile = new Blob([response.data], { type: 'application/msword' });
+        setFile(receivedFile);
 
-      goToDownloadResume();
-    })
-    .catch(function (error) {
-        setResponse(error.response.status);
-        goToErrorScreen();
-    });
-}
+        goToDownloadResume();
+      })
+      .catch(function (error) {
+          setResponse(error.response.status);
+          goToErrorScreen();
+      });
+  }
 
   const goToEnterUrl = () => {
     setStage(1);
@@ -89,7 +105,7 @@ function App() {
   return (
     <div data-testid='parent' style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkillsClick={requestSkillsList} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
-      {stage === 2 && <EnterManually findSkillsClick={goToSelectSkills} backClick={goToEnterUrl} />}
+      {stage === 2 && <EnterManually findSkillsClick={requestSkillsFromText} backClick={goToEnterUrl} description={description} setDescription={setDescription} />}
       {stage === 3 && <SelectSkills continueClick={requestDocumentEdit} foundSkills={foundSkills} selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />}
       {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} file={file} />}
       {stage === 5 && <LoadingScreen message='Finding skills...' />}

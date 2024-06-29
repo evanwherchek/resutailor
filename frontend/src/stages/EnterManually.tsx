@@ -14,6 +14,8 @@ interface Style {
 interface EnterManuallyProps {
   findSkillsClick: () => void;
   backClick: () => void;
+  description: string;
+  setDescription: (url: string) => void;
 }
 
 const styles: Style = {
@@ -41,12 +43,11 @@ const styles: Style = {
   },
 };
 
-const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClick }) => {
-  const [textFieldValue, setTextFieldValue] = useState('');
+const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClick, description, setDescription }) => {
   const [open, setOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTextFieldValue(event.target.value);
+    setDescription(event.target.value);
   };
 
   const checkField = (value: string) => {
@@ -77,10 +78,10 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClic
         variant="filled"
         multiline
         rows={10}
-        value={textFieldValue}
+        value={description}
         onChange={handleChange}
       />
-      <Button style={styles.button} variant="contained" onClick={() => checkField(textFieldValue)}>
+      <Button style={styles.button} variant="contained" onClick={() => checkField(description)}>
         Find skills
       </Button>
       <Button style={styles.textButton} variant="text" onClick={backClick}>

@@ -74,6 +74,38 @@ def parse_skills():
         return {'error': 'Context window exceeded'}, 413
     except _exceptions.APITimeoutError:
         return {'error': 'OpenAI timeout'}, 408
+    
+@app.route('/parseFromText', methods=['POST'])
+def parse_from_text():
+    """
+    Takes the job listing text, extracts the skills from it, and returns a list
+    """
+
+    data = request.get_json()
+    page_text = data['description']
+
+    if page_text == '':
+        return {'error': 'Unprocessable content'}, 422
+
+    try:
+        # Pass the prompt with the job description to OpenAI
+        completion = client.chat.completions.create(
+            temperature = TEMPERATURE,
+            model = MODEL,
+            timeout = TIMEOUT,
+            messages = [
+                {
+                    'role': 'user',
+                    'content': PROMPT + page_text
+                }
+            ]
+        )
+
+        return completion.choices[0].message.content
+    except _exceptions.RateLimitError:
+        return {'error': 'Context window exceeded'}, 413
+    except _exceptions.APITimeoutError:
+        return {'error': 'OpenAI timeout'}, 408
 
 @app.route('/appendSkills', methods=['POST'])
 def append_skills():
