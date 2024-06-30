@@ -45,7 +45,6 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick,
 
   const checkField = (value: string): void => {
     if (validator.isURL(value)) {
-      setUrl(value);
       findSkillsClick();
     } else {
       setOpen(true);
