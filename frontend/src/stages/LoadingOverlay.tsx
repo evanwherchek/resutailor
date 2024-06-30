@@ -1,9 +1,5 @@
 import { FireworkSpinner } from 'react-spinners-kit';
 
-interface LoadingScreenProps {
-  message: string;
-}
-
 interface Style {
   message: React.CSSProperties;
 }
@@ -14,11 +10,11 @@ const styles: Style = {
   },
 };
 
-const LoadingScreen: React.FC<LoadingScreenProps> = ({ message }) => {
+const LoadingScreen: React.FC = () => {
   return (
     <>
       <FireworkSpinner size={50} color="#FFFFFF" loading={true} />
-      <p style={styles.message}>{message}</p>
+      <p style={styles.message}>Loading...</p>
     </>
   );
 };

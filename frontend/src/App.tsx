@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { encode } from 'urlencode';
 
 import DownloadResume from './stages/DownloadResume';
@@ -30,87 +30,73 @@ function App() {
   const [description, setDescription] = useState<string>('');
   const [foundSkills, setFoundSkills] = useState<string[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-  const [response, setResponse] = useState<number>(0);
+  const [response, setResponse] = useState<AxiosResponse | null>(null);
   const [file, setFile] = useState<Blob | null>(null);
 
-  function requestSkillsList() {
+  const goToEnterUrl = (): void => setStage(1);
+  const goToEnterManually = (): void => setStage(2);
+  const goToSelectSkills = (): void => setStage(3);
+  const goToDownloadResume = (): void => setStage(4);
+  const goToLoadingScreen = (): void => setStage(5);
+  const goToErrorScreen = (): void => setStage(6);
+
+  function requestSkillsFromUrl(): void {
     goToLoadingScreen();
 
     axios.get('http://127.0.0.1:5000/parseSkills?postingUrl=' + encode(url))
-      .then(function (response) {
+      .then((response: AxiosResponse) => {
         setFoundSkills(response.data['skills']);
-
         goToSelectSkills();
       })
-      .catch(function (error) {
-        setResponse(error.response.status);
-        goToErrorScreen();
+      .catch((error: AxiosError) => {
+        if(error.response){
+          setResponse(error.response);
+          goToErrorScreen();
+        }
       });
   };
 
-  function requestSkillsFromText() {
+  function requestSkillsFromText(): void {
     goToLoadingScreen();
 
     axios.post('http://127.0.0.1:5000/parseFromText', { description: description })
-      .then(function (response) {
+      .then((response: AxiosResponse) => {
         setFoundSkills(response.data['skills']);
-
         goToSelectSkills();
       })
-      .catch(function (error) {
-        setResponse(error.response.status);
-        goToErrorScreen();
+      .catch((error: AxiosError) => {
+        if(error.response){
+          setResponse(error.response);
+          goToErrorScreen();
+        }
       });
   }
 
-  function requestDocumentEdit() {
+  function requestDocumentEdit(): void {
     goToLoadingScreen();
 
     axios.post('http://127.0.0.1:5000/appendSkills', { skills: selectedSkills }, { responseType: 'blob' })
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         const receivedFile = new Blob([response.data], { type: 'application/msword' });
         setFile(receivedFile);
-
         goToDownloadResume();
       })
-      .catch(function (error) {
-          setResponse(error.response.status);
+      .catch((error: AxiosError) => {
+        if(error.response){
+          setResponse(error.response);
           goToErrorScreen();
+        }
       });
   }
 
-  const goToEnterUrl = () => {
-    setStage(1);
-  };
-
-  const goToEnterManually = () => {
-    setStage(2);
-  };
-
-  const goToSelectSkills = () => {
-    setStage(3);
-  };
-
-  const goToDownloadResume = () => {
-    setStage(4);
-  };
-
-  const goToLoadingScreen = () => {
-    setStage(5);
-  }
-
-  const goToErrorScreen = () => {
-    setStage(6);
-  };
-
   return (
     <div data-testid='parent' style={styles.backdrop}>
-      {stage === 1 && <EnterUrl findSkillsClick={requestSkillsList} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl}/>}
+      {stage === 1 && <EnterUrl findSkillsClick={requestSkillsFromUrl} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl} />}
       {stage === 2 && <EnterManually findSkillsClick={requestSkillsFromText} backClick={goToEnterUrl} description={description} setDescription={setDescription} />}
       {stage === 3 && <SelectSkills continueClick={requestDocumentEdit} foundSkills={foundSkills} selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />}
       {stage === 4 && <DownloadResume newResumeClick={goToEnterUrl} file={file} />}
-      {stage === 5 && <LoadingScreen message='Finding skills...' />}
-      {stage === 6 && <ErrorScreen response={response} tryAgainClick={goToEnterUrl} />}
+      {stage === 5 && <LoadingScreen />}
+      {stage === 6 && <ErrorScreen tryAgainClick={goToEnterUrl} response={response} />}
     </div>
   );
 }

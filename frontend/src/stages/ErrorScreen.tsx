@@ -1,8 +1,9 @@
 import { Button } from '@mui/material';
+import { AxiosResponse } from 'axios';
 
 interface ErrorScreenProps {
-  response: number;
   tryAgainClick: () => void;
+  response: AxiosResponse | null;
 }
 
 interface Style {
@@ -33,19 +34,19 @@ const styles: Style = {
   },
 };
 
-const ErrorScreen: React.FC<ErrorScreenProps> = ({ response, tryAgainClick }) => {
+const ErrorScreen: React.FC<ErrorScreenProps> = ({ tryAgainClick, response }) => {
+  let errorCode: number = 200;
+  let message: string = 'OK';
+
+  if(response !== null){
+    errorCode = response.status;
+    message = response.data.message;
+  }
+
   return (
     <>
-      <p style={styles.mainText}>Error {response}</p>
-      <p style={styles.subText}>
-        {response === 408
-          ? 'OpenAI timeout.'
-          : response === 413
-            ? 'Context window exceeded.'
-            : response === 422
-              ? 'Unprocessable content.'
-              : 'An unknown error occurred.'}
-      </p>
+      <p style={styles.mainText}>Response {errorCode}</p>
+      <p style={styles.subText}>{message}</p>
       <Button style={styles.button} variant="contained" onClick={tryAgainClick}>
         Try again
       </Button>
