@@ -38,7 +38,7 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({ tryAgainClick, response }) =>
   let errorCode: number = 200;
   let message: string = 'OK';
 
-  if(response !== null){
+  if (response !== null) {
     errorCode = response.status;
     message = response.data.message;
   }
