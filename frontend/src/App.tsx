@@ -6,7 +6,7 @@ import DownloadResume from './stages/DownloadResume';
 import EnterManually from './stages/EnterManually';
 import EnterUrl from './stages/EnterUrl';
 import ErrorScreen from './stages/ErrorScreen';
-import LoadingScreen from './stages/LoadingOverlay';
+import LoadingScreen from './stages/LoadingScreen';
 import SelectSkills from './stages/SelectSkills';
 
 interface Style {

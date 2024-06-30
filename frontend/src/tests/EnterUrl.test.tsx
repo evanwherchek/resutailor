@@ -1,63 +1,36 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import EnterUrl from '../stages/EnterUrl';
 
 describe('EnterUrl', () => {
-  const findSkillsClickMock = jest.fn();
-  const copyAndPasteClickMock = jest.fn();
-  const setUrlMock = jest.fn();
-
-  test('renders correctly', () => {
-    render(
-      <EnterUrl
-        findSkillsClick={findSkillsClickMock}
-        copyAndPasteClick={copyAndPasteClickMock}
-        url=""
-        setUrl={setUrlMock}
-      />,
-    );
-    expect(screen.getByLabelText('Job posting URL')).toBeInTheDocument();
-    expect(screen.getByText('Find skills')).toBeInTheDocument();
-    expect(screen.getByText('Copy and paste instead')).toBeInTheDocument();
+  const mockSetUrl = jest.fn();
+  const mockFindSkillsClick = jest.fn();
+  const mockCopyAndPasteClick = jest.fn();
+  
+  it('renders without crashing', () => {
+    render(<EnterUrl findSkillsClick={mockFindSkillsClick} copyAndPasteClick={mockCopyAndPasteClick} url="" setUrl={mockSetUrl} />);
   });
 
-  test('calls findSkillsClick when URL is valid', () => {
-    render(
-      <EnterUrl
-        findSkillsClick={findSkillsClickMock}
-        copyAndPasteClick={copyAndPasteClickMock}
-        url=""
-        setUrl={setUrlMock}
-      />,
-    );
-    fireEvent.change(screen.getByLabelText('Job posting URL'), { target: { value: 'https://valid.url' } });
-    fireEvent.click(screen.getByText('Find skills'));
-    expect(findSkillsClickMock).toHaveBeenCalled();
+  it('calls setUrl when the input value is changed', () => {
+    const { getByLabelText } = render(<EnterUrl findSkillsClick={mockFindSkillsClick} copyAndPasteClick={mockCopyAndPasteClick} url="" setUrl={mockSetUrl} />);
+    fireEvent.change(getByLabelText('Job posting URL'), { target: { value: 'test' } });
+    expect(mockSetUrl).toHaveBeenCalledWith('test');
   });
 
-  test('does not call findSkillsClick when URL is invalid', () => {
-    render(
-      <EnterUrl
-        findSkillsClick={findSkillsClickMock}
-        copyAndPasteClick={copyAndPasteClickMock}
-        url=""
-        setUrl={setUrlMock}
-      />,
-    );
-    fireEvent.change(screen.getByLabelText('Job posting URL'), { target: { value: 'invalid url' } });
-    fireEvent.click(screen.getByText('Find skills'));
-    expect(findSkillsClickMock).not.toHaveBeenCalled();
+  it('calls findSkillsClick when a valid url is entered', () => {
+    const { getByText } = render(<EnterUrl findSkillsClick={mockFindSkillsClick} copyAndPasteClick={mockCopyAndPasteClick} url="https://example.com" setUrl={mockSetUrl} />);
+    fireEvent.click(getByText('Find skills'));
+    expect(mockFindSkillsClick).toHaveBeenCalled();
   });
 
-  test('calls copyAndPasteClick when "Copy and paste instead" is clicked', () => {
-    render(
-      <EnterUrl
-        findSkillsClick={findSkillsClickMock}
-        copyAndPasteClick={copyAndPasteClickMock}
-        url=""
-        setUrl={setUrlMock}
-      />,
-    );
-    fireEvent.click(screen.getByText('Copy and paste instead'));
-    expect(copyAndPasteClickMock).toHaveBeenCalled();
+  it('calls copyAndPasteClick when the Copy and paste button is clicked', () => {
+    const { getByText } = render(<EnterUrl findSkillsClick={mockFindSkillsClick} copyAndPasteClick={mockCopyAndPasteClick} url="" setUrl={mockSetUrl} />);
+    fireEvent.click(getByText('Copy and paste instead'));
+    expect(mockCopyAndPasteClick).toHaveBeenCalled();
+  });
+
+  it('shows an error message when an invalid url is entered', () => {
+    const { getByText } = render(<EnterUrl findSkillsClick={mockFindSkillsClick} copyAndPasteClick={mockCopyAndPasteClick} url="invalid url" setUrl={mockSetUrl} />);
+    fireEvent.click(getByText('Find skills'));
+    expect(getByText('Please enter a valid URL.')).toBeInTheDocument();
   });
 });
