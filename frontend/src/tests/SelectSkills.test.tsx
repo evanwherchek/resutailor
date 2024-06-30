@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import SelectSkills from '../stages/SelectSkills';
 
 describe('SelectSkills', () => {
@@ -10,20 +10,20 @@ describe('SelectSkills', () => {
   });
 
   it('populates chips with found skills', () => {
-    const { getByText } = render(<SelectSkills continueClick={mockContinueClick} foundSkills={['skill1', 'skill2']} selectedSkills={[]} setSelectedSkills={mockSetSelectedSkills} />);
-    expect(getByText('skill1')).toBeInTheDocument();
-    expect(getByText('skill2')).toBeInTheDocument();
+    render(<SelectSkills continueClick={mockContinueClick} foundSkills={['skill1', 'skill2']} selectedSkills={[]} setSelectedSkills={mockSetSelectedSkills} />);
+    expect(screen.getByText('skill1')).toBeInTheDocument();
+    expect(screen.getByText('skill2')).toBeInTheDocument();
   });
 
   it('calls continueClick when the Continue button is clicked and at least one skill is selected', () => {
-    const { getByText } = render(<SelectSkills continueClick={mockContinueClick} foundSkills={['skill1']} selectedSkills={['skill1']} setSelectedSkills={mockSetSelectedSkills} />);
-    fireEvent.click(getByText('Continue'));
+    render(<SelectSkills continueClick={mockContinueClick} foundSkills={['skill1']} selectedSkills={['skill1']} setSelectedSkills={mockSetSelectedSkills} />);
+    fireEvent.click(screen.getByText('Continue'));
     expect(mockContinueClick).toHaveBeenCalled();
   });
 
   it('shows an error message when the Continue button is clicked and no skills are selected', () => {
-    const { getByText } = render(<SelectSkills continueClick={mockContinueClick} foundSkills={['skill1']} selectedSkills={[]} setSelectedSkills={mockSetSelectedSkills} />);
-    fireEvent.click(getByText('Continue'));
-    expect(getByText('Please select at least one skill.')).toBeInTheDocument();
+    render(<SelectSkills continueClick={mockContinueClick} foundSkills={['skill1']} selectedSkills={[]} setSelectedSkills={mockSetSelectedSkills} />);
+    fireEvent.click(screen.getByText('Continue'));
+    expect(screen.getByText('Please select at least one skill.')).toBeInTheDocument();
   });
 });
