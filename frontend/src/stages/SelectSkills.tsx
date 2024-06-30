@@ -79,10 +79,10 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
   setSelectedSkills,
 }) => {
   const [chipList, setChipList] = useState<ChipData[]>([]);
-  const [open, setOpen] = useState(false);
-  const [continueClicked, setContinueClicked] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [continueClicked, setContinueClicked] = useState<boolean>(false);
 
-  const handleChipClick = (data: ChipData) => {
+  const handleChipClick = (data: ChipData): void => {
     setChipList((prevChipList: ChipData[]) => {
       return prevChipList.map((chip) => {
         if (chip.key === data.key) {
@@ -98,8 +98,8 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     });
   };
 
-  const populateList = (skills: string[]) => {
-    const newChipList = [];
+  const populateList = (skills: string[]): void => {
+    const newChipList: ChipData[] = [];
 
     for (let i = 0; i < skills.length; i++) {
       newChipList.push({ key: i, label: skills[i], style: styles.unselectedChip, selected: false });
@@ -108,7 +108,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     setChipList(newChipList);
   };
 
-  const updateSelected = () => {
+  const updateSelected = (): void => {
     const newSelectedSkills = chipList.reduce((acc: string[], chip) => {
       if (chip.selected) {
         acc.push(chip.label);
@@ -120,7 +120,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     setContinueClicked(true);
   };
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string): void => {
     if (reason === 'clickaway') {
       return;
     }

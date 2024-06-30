@@ -37,13 +37,13 @@ const styles: Style = {
 };
 
 const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick, url, setUrl }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setUrl(event.target.value);
   };
 
-  const checkField = (value: string) => {
+  const checkField = (value: string): void => {
     if (validator.isURL(value)) {
       setUrl(value);
       findSkillsClick();
@@ -52,7 +52,7 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick,
     }
   };
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string): void => {
     if (reason === 'clickaway') {
       return;
     }

@@ -44,13 +44,13 @@ const styles: Style = {
 };
 
 const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClick, description, setDescription }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDescription(event.target.value);
   };
 
-  const checkField = (value: string) => {
+  const checkField = (value: string): void => {
     if (!validator.isEmpty(value.trim())) {
       findSkillsClick();
     } else {
@@ -58,7 +58,7 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClic
     }
   };
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string): void => {
     if (reason === 'clickaway') {
       return;
     }
