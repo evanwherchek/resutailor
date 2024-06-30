@@ -1,0 +1,27 @@
+name: Run React Tests
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'frontend/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: cd frontend && npm ci --legacy-peer-deps
+
+    - name: Run tests
+      run: npm test

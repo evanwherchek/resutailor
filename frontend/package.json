@@ -9,7 +9,7 @@
     "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.21",
     "@testing-library/jest-dom": "^6.4.6",
-    "@testing-library/react": "^16.0.0",
+    "@testing-library/react": "^15.0.6",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.9",
@@ -39,7 +39,9 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "@babel/plugin-transform-private-property-in-object",
+      "next/core-web-vitals"
     ]
   },
   "prettier": {
