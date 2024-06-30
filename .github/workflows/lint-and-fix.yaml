@@ -19,7 +19,7 @@ jobs:
         node-version: '18'
 
     - name: Install dependencies
-      run: cd frontend && npm ci
+      run: cd frontend && npm ci --legacy-peer-deps
 
     - name: Lint and Fix
       run: cd frontend && npm run lint || npm run lint:fix
