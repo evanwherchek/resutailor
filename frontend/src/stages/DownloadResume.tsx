@@ -43,7 +43,7 @@ const styles: Style = {
 };
 
 const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick, file }) => {
-  const handleDownload = () => {
+  const handleDownload = (): void => {
     const blob = file;
 
     if (blob !== null) {
