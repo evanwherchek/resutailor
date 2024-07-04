@@ -146,4 +146,4 @@ def append_skills():
     return send_file(new_file_name, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
