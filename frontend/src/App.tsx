@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { encode } from 'urlencode';
 
@@ -88,6 +88,10 @@ function App() {
         }
       });
   }
+
+  useEffect(() => {
+    document.title = "ResuTailor";
+  }, []);
 
   return (
     <div data-testid='parent' style={styles.backdrop}>
