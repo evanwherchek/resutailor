@@ -118,7 +118,7 @@ def append_skills():
     if not skills: # Check if the skills list is empty
         return {'error': 'Unprocessable content'}, 422
 
-    file_name = 'ResumeTemplate.docx'
+    file_name = 'Template.docx'
 
     if not os.path.exists(file_name):
         return {'error': 'File ' + file_name + ' not found'}, 404
@@ -145,10 +145,6 @@ def append_skills():
     document.save(new_file_name)
 
     return send_file(new_file_name, as_attachment=True)
-
-@app.route('/')
-def home():
-    return "Hello, World!"
 
 if __name__ == '__main__':
     app.run(debug=False)

@@ -51,7 +51,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick, file })
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = url;
-      a.download = 'Resume_EvanHerchek.docx';
+      a.download = 'Resume.docx';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -63,7 +63,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick, file })
       <p style={styles.mainText}>All done!</p>
       <p style={styles.subText}>Your tailored resume is below.</p>
       <Button style={styles.button} startIcon={<DownloadIcon />} variant="contained" onClick={handleDownload}>
-        Resume_EvanHerchek.docx
+        Resume.docx
       </Button>
       <Button style={styles.textButton} variant="text" onClick={newResumeClick}>
         New resume
