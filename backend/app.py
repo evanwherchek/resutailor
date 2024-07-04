@@ -74,7 +74,7 @@ def parse_skills():
         return {'error': 'Context window exceeded'}, 413
     except _exceptions.APITimeoutError:
         return {'error': 'OpenAI timeout'}, 408
-    
+
 @app.route('/parseFromText', methods=['POST'])
 def parse_from_text():
     """
@@ -132,7 +132,8 @@ def append_skills():
 
     replacement_line = ''
 
-    for index, skill in enumerate(skills): # Create the line that will be added to the skills section of the document
+    # Create the line that will be added to the skills section of the document
+    for index, skill in enumerate(skills):
         replacement_line += skill
         if index != len(skills) - 1:
             replacement_line += ', '
@@ -145,5 +146,9 @@ def append_skills():
 
     return send_file(new_file_name, as_attachment=True)
 
+@app.route('/')
+def home():
+    return "Hello, World!"
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=False)

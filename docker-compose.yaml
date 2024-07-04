@@ -1,0 +1,10 @@
+version: '3'
+services:
+  back:
+    image: back
+    ports:
+      - "5000:5000"
+  front:
+    image: front
+    ports:
+      - "3000:3000"
