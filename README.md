@@ -30,4 +30,21 @@ The final step is to add your resume to the backend directory. The resume file s
 2. Rename the file to "Template.docx".
 3. Move or copy the "Template.docx" file to the backend directory of the project.
 
-## Using ResuTailor Locally
+## Running ResuTailor Locally
+
+If you only want to run ResuTailor on your computer, you can launch the Docker containers for the app by running ```docker-compose up``` from the root of the project in a terminal. Then navigate to localhost:3000 in a browser and you'll have access to it.
+
+## Hosting ResuTailor in the Cloud(Recommended)
+
+Text goes here
+
+## Usage
+
+Using ResuTailor is easy and straightforward!
+
+1. Copy and paste the URL of the job you are applying to then click "Find skills".
+2. Select the skills that you have based on the choices that are presented.
+3. Download your newly generated resume.
+
+> [!TIP]
+> If you are getting an error when trying to enter a URL, it may be because the backend is having trouble accessing the page text. To get around this you can copy and paste the job description by clicking "Copy and paste instead". ResuTailor will then pull the skills from the text you paste.
