@@ -23,6 +23,9 @@ After generating your OpenAI API key, the next step is to create a .env file in 
 2. Create a new file and name it ```.env```.
 3. Open the .env file and add the following line: ```OPENAI_API_KEY=your_api_key```. Replace ```your_api_key``` with the API key you generated in the last section.
 
+> [!WARNING]
+> If you choose to host ResuTailor on a cloud platform, beware of sharing the URL used to access the application. Unauthorized users accessing the application can lead to high server bills and your OpenAI API key being charged.
+
 <ins>Add Your Resume</ins>
 
 The final step is to add your resume to the backend directory. The resume file should be a .docx file and should be named "Template.docx".
