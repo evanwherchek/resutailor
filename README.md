@@ -37,7 +37,13 @@ If you only want to run ResuTailor on your computer, you can launch the Docker c
 
 ## Hosting ResuTailor in the Cloud(Recommended)
 
-Text goes here
+ResuTailor is Dockerized for easy deployment to the cloud. This will allow you to have quick access to the application from any device. Below are a few resources for hosting Docker applications on the major cloud providers.
+
+<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Creating a container image for use on Amazon ECS</a>
+
+<a href="https://cloud.google.com/run/docs/deploying">Deploying to Cloud Run | Cloud Run Documentation | Google Cloud</a>
+
+<a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart">Quickstart: Deploy a container instance in Azure using the Azure CLI</a>
 
 ## Usage
 
