@@ -23,9 +23,6 @@ After generating your OpenAI API key, the next step is to create a .env file in 
 2. Create a new file and name it ```.env```.
 3. Open the .env file and add the following line: ```OPENAI_API_KEY=your_api_key```. Replace ```your_api_key``` with the API key you generated in the last section.
 
-> [!WARNING]
-> If you choose to host ResuTailor on a cloud platform, beware of sharing the URL used to access the application. Unauthorized users accessing the application can lead to high server bills and your OpenAI API key being charged.
-
 <ins>Add Your Resume</ins>
 
 The final step is to add your resume to the backend directory. The resume file should be a .docx file and should be named "Template.docx".
@@ -40,13 +37,16 @@ If you only want to run ResuTailor on your computer, you can launch the Docker c
 
 ## Hosting ResuTailor in the Cloud(Recommended)
 
-ResuTailor is Dockerized for easy deployment to the cloud. This will allow you to have quick access to the application from any device. Below are a few resources for hosting Docker applications on the major cloud providers.
+ResuTailor is Dockerized for easy deployment to the cloud. This will allow you to have quick access to the application from any device. Below are a few resources for hosting Docker applications on major cloud providers.
 
 <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Creating a container image for use on Amazon ECS</a>
 
 <a href="https://cloud.google.com/run/docs/deploying">Deploying to Cloud Run | Cloud Run Documentation | Google Cloud</a>
 
 <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart">Quickstart: Deploy a container instance in Azure using the Azure CLI</a>
+
+> [!WARNING]
+> If you choose to host ResuTailor on a cloud platform, beware of sharing the URL used to access the application. Unauthorized users accessing the application can lead to high server bills and your OpenAI API key being charged.
 
 ## Usage
 
