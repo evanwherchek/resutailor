@@ -48,3 +48,7 @@ Using ResuTailor is easy and straightforward!
 
 > [!TIP]
 > If you are getting an error when trying to enter a URL, it may be because the backend is having trouble accessing the page text. To get around this you can copy and paste the job description by clicking "Copy and paste instead". ResuTailor will then pull the skills from the text you paste.
+
+## Acknowledgements
+
+Artwork for the Favicon and Readme header on this project has been generously provided by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>.
