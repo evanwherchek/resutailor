@@ -4,7 +4,7 @@
 
 <p align="center">ResuTailor is a web application that allows you to automatically insert skills into your resume based on a job description providing an ATS advantage when applying for jobs.</p>
 
-## Getting started
+## Getting Started
 
 To configure ResuTailor, clone the codebase to your machine and do the following:
 
@@ -29,3 +29,5 @@ The final step is to add your resume to the backend directory. The resume file s
 1. Prepare your resume and save it as a .docx file.
 2. Rename the file to "Template.docx".
 3. Move or copy the "Template.docx" file to the backend directory of the project.
+
+## Using ResuTailor Locally
