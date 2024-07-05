@@ -51,4 +51,4 @@ Using ResuTailor is easy and straightforward!
 
 ## Acknowledgements
 
-Artwork for the Favicon and Readme header on this project has been generously provided by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>.
+Artwork for the Favicon and Readme header on this project has been generously provided by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
