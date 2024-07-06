@@ -39,11 +39,11 @@ If you only want to run ResuTailor on your computer, you can launch the Docker c
 
 ResuTailor is Dockerized for easy deployment to the cloud. This will allow you to have quick access to the application from any device. Below are a few resources for hosting Docker applications on major cloud providers.
 
-<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html" target="_blank">Creating a container image for use on Amazon ECS</a>
+<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Creating a container image for use on Amazon ECS</a>
 
-<a href="https://cloud.google.com/run/docs/deploying" target="_blank">Deploying to Cloud Run | Cloud Run Documentation | Google Cloud</a>
+<a href="https://cloud.google.com/run/docs/deploying">Deploying to Cloud Run | Cloud Run Documentation | Google Cloud</a>
 
-<a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart" target="_blank">Quickstart: Deploy a container instance in Azure using the Azure CLI</a>
+<a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart">Quickstart: Deploy a container instance in Azure using the Azure CLI</a>
 
 > [!WARNING]
 > If you choose to host ResuTailor on a cloud platform, beware of sharing the URL used to access the application. Unauthorized users accessing the application can lead to high server bills and your OpenAI API key being charged.
@@ -61,4 +61,4 @@ Using ResuTailor is easy and straightforward!
 
 ## Acknowledgements
 
-Artwork for the Favicon and Readme header on this project has been generously provided by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
+Artwork for the Favicon and Readme header on this project has been generously provided by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
