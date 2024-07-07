@@ -44,7 +44,7 @@ ResuTailor is Dockerized for easy deployment to the cloud. This will allow you t
 <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart">Quickstart: Deploy a container instance in Azure using the Azure CLI</a>
 
 > [!WARNING]
-> If you choose to host ResuTailor on a cloud platform, beware of sharing the URL used to access the application. Unauthorized users accessing the application can lead to high server bills and your OpenAI API key being charged.
+> If you choose to host ResuTailor on a cloud platform, beware of sharing the URL used to access the application. Unauthorized users accessing the application can lead to high server bills and your OpenAI account being charged.
 
 ## Usage
 
