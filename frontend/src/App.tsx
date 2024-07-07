@@ -25,6 +25,9 @@ const styles: Style = {
 };
 
 function App() {
+  // The variables used throughout the app.
+  // These states are lowered into their respective components and
+  // lifted back up while the app is being used.
   const [stage, setStage] = useState<number>(1);
   const [url, setUrl] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -33,6 +36,7 @@ function App() {
   const [response, setResponse] = useState<AxiosResponse | null>(null);
   const [file, setFile] = useState<Blob | null>(null);
 
+  // These functions control the stage that is being shown.
   const goToEnterUrl = (): void => setStage(1);
   const goToEnterManually = (): void => setStage(2);
   const goToSelectSkills = (): void => setStage(3);
@@ -40,6 +44,7 @@ function App() {
   const goToLoadingScreen = (): void => setStage(5);
   const goToErrorScreen = (): void => setStage(6);
 
+  // The following three functions are used for HTTP requests
   function requestSkillsFromUrl(): void {
     goToLoadingScreen();
 
@@ -93,6 +98,7 @@ function App() {
     document.title = "ResuTailor";
   }, []);
 
+  // Every stage corresponds to an integer value
   return (
     <div data-testid='parent' style={styles.backdrop}>
       {stage === 1 && <EnterUrl findSkillsClick={requestSkillsFromUrl} copyAndPasteClick={goToEnterManually} url={url} setUrl={setUrl} />}

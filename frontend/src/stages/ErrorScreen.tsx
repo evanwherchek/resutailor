@@ -35,9 +35,11 @@ const styles: Style = {
 };
 
 const ErrorScreen: React.FC<ErrorScreenProps> = ({ tryAgainClick, response }) => {
-  let errorCode: number = 200;
-  let message: string = 'OK';
+  // Default values for the error
+  let errorCode: number = 520;
+  let message: string = 'Unknown error';
 
+  // Map the error code and message to the given response
   if (response !== null) {
     errorCode = response.status;
     message = response.data.message;

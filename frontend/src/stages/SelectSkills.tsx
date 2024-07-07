@@ -82,6 +82,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
   const [open, setOpen] = useState<boolean>(false);
   const [continueClicked, setContinueClicked] = useState<boolean>(false);
 
+  // Change the selected state of a chip
   const handleChipClick = (data: ChipData): void => {
     setChipList((prevChipList: ChipData[]) => {
       return prevChipList.map((chip) => {
@@ -108,6 +109,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     setChipList(newChipList);
   };
 
+  // Check which chips are selected
   const updateSelected = (): void => {
     const newSelectedSkills = chipList.reduce((acc: string[], chip) => {
       if (chip.selected) {
@@ -128,6 +130,7 @@ const SelectSkills: React.FC<SelectSkillsProps> = ({
     setOpen(false);
   };
 
+  // Prevent any asynchronous state errors when clicking continue
   useEffect(() => {
     if (continueClicked) {
       if (selectedSkills.length > 0) {

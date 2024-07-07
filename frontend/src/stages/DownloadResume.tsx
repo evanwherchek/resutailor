@@ -43,6 +43,7 @@ const styles: Style = {
 };
 
 const DownloadResume: React.FC<DownloadResumeProps> = ({ newResumeClick, file }) => {
+  // Take the given blob and download it as a docx file
   const handleDownload = (): void => {
     const blob = file;
 

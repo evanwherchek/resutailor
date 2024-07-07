@@ -10,8 +10,8 @@ describe('ErrorScreen', () => {
 
   it('displays default status and message when response is null', () => {
     render(<ErrorScreen tryAgainClick={mockTryAgainClick} response={null} />);
-    expect(screen.getByText('Response 200')).toBeInTheDocument();
-    expect(screen.getByText('OK')).toBeInTheDocument();
+    expect(screen.getByText('Response 520')).toBeInTheDocument();
+    expect(screen.getByText('Unknown error')).toBeInTheDocument();
   });
 
   it('calls tryAgainClick when the Try again button is clicked', () => {

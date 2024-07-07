@@ -44,12 +44,14 @@ const styles: Style = {
 };
 
 const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClick, description, setDescription }) => {
+  // Controls if the snackbar is open
   const [open, setOpen] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDescription(event.target.value);
   };
 
+  // Check that a valid URL was entered before continuing
   const checkField = (value: string): void => {
     if (!validator.isEmpty(value.trim())) {
       findSkillsClick();
@@ -58,6 +60,7 @@ const EnterManually: React.FC<EnterManuallyProps> = ({ findSkillsClick, backClic
     }
   };
 
+  // Handles the closing of the snackbar
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string): void => {
     if (reason === 'clickaway') {
       return;

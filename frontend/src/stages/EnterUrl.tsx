@@ -37,12 +37,14 @@ const styles: Style = {
 };
 
 const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick, url, setUrl }) => {
+  // Controls if the snackbar is open
   const [open, setOpen] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setUrl(event.target.value);
   };
 
+  // Check that a valid URL was entered before continuing
   const checkField = (value: string): void => {
     if (validator.isURL(value)) {
       findSkillsClick();
@@ -51,6 +53,7 @@ const EnterUrl: React.FC<EnterUrlProps> = ({ findSkillsClick, copyAndPasteClick,
     }
   };
 
+  // Handles the closing of the snackbar
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string): void => {
     if (reason === 'clickaway') {
       return;
