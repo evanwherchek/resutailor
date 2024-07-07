@@ -8,7 +8,7 @@ To configure ResuTailor, clone the codebase to your machine and do the following
 
 <ins>Generate an OpenAI API Key</ins>
 
-ResuTailor is powered by OpenAi. To generate an OpenAI API key, you need to follow these steps:
+ResuTailor is powered by OpenAI. To generate an OpenAI API key, you need to follow these steps:
 1. Visit <https://platform.openai.com> and sign up if you haven't already.
 2. Click on 'API keys'
 3. Click on 'Create new secret key'.
