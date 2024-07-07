@@ -31,7 +31,7 @@ The final step is to add your resume to the backend directory. The resume file s
 
 ## Running ResuTailor Locally
 
-If you only want to run ResuTailor on your computer, you can launch the Docker containers for the app by running ```docker-compose up``` from the root of the project in a terminal. Then navigate to <https://localhost:3000> in a browser and you'll have access to it.
+If you only want to run ResuTailor on your computer, you can launch the Docker containers for the app by running ```docker-compose up``` from the root of the project in a terminal. Then navigate to localhost:3000 in a browser and you'll have access to it.
 
 ## Hosting ResuTailor in the Cloud(Recommended)
 
