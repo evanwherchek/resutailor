@@ -8,10 +8,10 @@ To configure ResuTailor, clone the codebase to your machine and do the following
 
 <ins>Generate an OpenAI API Key</ins>
 
-To generate an OpenAI API key, you need to follow these steps:
-1. Visit the OpenAI website and sign up if you haven't already.
-2. Navigate to the API section.
-3. Click on 'Create New API Key'.
+ResuTailor is powered by OpenAi. To generate an OpenAI API key, you need to follow these steps:
+1. Visit <https://platform.openai.com> and sign up if you haven't already.
+2. Click on 'API keys'
+3. Click on 'Create new secret key'.
 4. Copy the generated API key.
 
 <ins>Create a .env File</ins>
@@ -31,7 +31,7 @@ The final step is to add your resume to the backend directory. The resume file s
 
 ## Running ResuTailor Locally
 
-If you only want to run ResuTailor on your computer, you can launch the Docker containers for the app by running ```docker-compose up``` from the root of the project in a terminal. Then navigate to localhost:3000 in a browser and you'll have access to it.
+If you only want to run ResuTailor on your computer, you can launch the Docker containers for the app by running ```docker-compose up``` from the root of the project in a terminal. Then navigate to <https://localhost:3000> in a browser and you'll have access to it.
 
 ## Hosting ResuTailor in the Cloud(Recommended)
 
