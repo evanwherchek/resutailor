@@ -44,7 +44,7 @@ ResuTailor is Dockerized for easy deployment to the cloud. This will allow you t
 <a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart">Quickstart: Deploy a container instance in Azure using the Azure CLI</a>
 
 > [!WARNING]
-> ResuTailor is intended to be for personal use only. If you choose to host ResuTailor in the cloud, please be aware of any security vulnerabilities such as sharing your endpoint URL used to access the application.
+> ResuTailor is intended to be for personal use only. If you choose to host ResuTailor in the cloud, please be aware of any security vulnerabilities that may arise from sharing your endpoint URL used to access the application.
 
 ## Usage
 
