@@ -24,7 +24,7 @@ After generating your OpenAI API key, the next step is to create a .env file in 
 <ins>Add Your Resume</ins>
 
 The final step is to add your resume to the backend directory. The resume file should be a .docx file and should be named "Template.docx".
-1. Prepare your resume and save it as a .docx file.
+1. Prepare your resume with any details you want.
 2. Add a line with the text ```[EDIT HERE]``` where you want your skills to appear. Refer to the default template as an example.
 3. Rename the file to "Template.docx".
 4. Move or copy the "Template.docx" file to the backend directory of the project.
